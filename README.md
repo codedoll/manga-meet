@@ -3,6 +3,7 @@
 
 ![enter image description here](https://github.com/codedoll/manga-meet/blob/master/Screen%20Shot%202016-07-11%20at%202.34.33%20PM.png?raw=true)
 
+![](https://github.com/codedoll/manga-meet/blob/master/userstories.png)
 **USER STORIES:**
 - User can register an account 
 - User can log in 
