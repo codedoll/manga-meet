@@ -11,7 +11,8 @@ var mangaSchema = new Schema({
         "image_url_lge": String,
         "image_url_med": String,
         "publishing_status": String,
-        "total_volumes": Number
+        "total_volumes": Number,
+        "adult": false
 });
 
 
