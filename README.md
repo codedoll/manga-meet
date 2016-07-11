@@ -1,5 +1,7 @@
-# Manga-Meet
+**Manga Meet**
 ----------
+
+![enter image description here](https://github.com/codedoll/manga-meet/blob/master/Screen%20Shot%202016-07-11%20at%202.34.33%20PM.png?raw=true)
 
 **USER STORIES:**
 - User can register an account 
