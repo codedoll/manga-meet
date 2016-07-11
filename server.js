@@ -9,10 +9,11 @@ var express = require('express'),
 //Database name is mange_meet
 mongoose.connect('mongodb://localhost/manga_meet');
 
+app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(express.static('public'));
 
 var mangaController = require('./controllers/mangaController');
 var userController = require('./controllers/userController');
