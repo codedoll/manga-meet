@@ -14,6 +14,7 @@ var mangaSchema = new Schema({
         "total_volumes": Number
 });
 
+
 var Manga = mongoose.model('Manga', mangaSchema);
 
 module.exports  = Manga;
