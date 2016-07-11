@@ -1,9 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="MangaMeet">
+
 <head>
-	<title></title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title></title>
 </head>
-<body>
-This is the index.html page
+
+<body ng-controller="MainController as ctrl">
+    <!-- HEADER FOR HOMEPAGE -->
+    <div id="home-header">
+        <div class="headerDiv" id="header-title">
+            MangaMeet
+        </div>
+        <div class="headerDiv" id="login-partial">
+            <form ng-submit="ctrl.loginForm(loginform)">
+                <input type="text" name="" ng-model="loginform.username" placeholder="username">
+                <input type="text" name="" ng-model="loginform.password" placeholder="password">
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+
+    <!-- MANGA VOLUMES READING -->
+    <div>
+    <h1>Books reading</h1>
+    	<div id="currentReadHolder">
+    		<div class="currentRead">volume 1</div>
+    		<div class="currentRead">volume 2</div>
+    		<div class="currentRead">volume 3</div>
+    		<div class="currentRead">volume 4</div>
+    		<div class="currentRead">volume 5</div>
+
+    	</div>
+    </div>
+    <!-- end manga volumes reading -->
+
+
+    <!-- RECOMMENDED MANGAS -->
+    <div>
+    <h1>Books reading</h1>
+    	<div id="recommendReadHolder">
+    		<div class="recommendRead">recommended manga 1</div>
+    		<div class="recommendRead">recommended manga 2</div>
+    		<div class="recommendRead">recommended manga 3</div>
+    		<div class="recommendRead">recommended manga 4</div>
+    		<div class="recommendRead">recommended manga 5</div>
+
+    	</div>
+    </div>
+    <!-- end recommended mangas -->
+
 </body>
+
 </html>
