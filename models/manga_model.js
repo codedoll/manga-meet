@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var mangaSchema = new Schema({
-	"type": String,
+        "type": String,
         "title_japanese": String,
         "title_english": String,
         "description": String,

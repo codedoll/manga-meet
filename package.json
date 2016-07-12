@@ -1,0 +1,26 @@
+{
+  "name": "manga-meet",
+  "version": "1.0.0",
+  "description": "----------",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codedoll/manga-meet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codedoll/manga-meet/issues"
+  },
+  "homepage": "https://github.com/codedoll/manga-meet#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
+    "env": "0.0.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.3"
+  }
+}

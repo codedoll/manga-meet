@@ -26,3 +26,8 @@
 - Show page for manga
 - Limit number of rental
 - Time limit of rental 
+
+**ORGANIZATION TOOLS**
+- Draw.io - a Google Doc flowchart maker
+- Waffle - (shoutout to Karl) https://waffle.io/codedoll/manga-meet
+- Github issues and milestones
