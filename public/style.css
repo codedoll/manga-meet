@@ -21,7 +21,7 @@ div {
     height: 150px;
 }
 
-#currentReadHolder, #recommendReadHolder {
+#currentReadHolder, #recommendReadHolder, #ownedMangaHolder {
    display: -webkit-flex;
    display: flex;
    -webkit-flex-direction: row /* works with row or column */
