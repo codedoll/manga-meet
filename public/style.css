@@ -32,3 +32,10 @@ div {
    justify-content: center;
    /*http://www.sketchingwithcss.com/samplechapter/cheatsheet.html*/
 }
+
+/* div that houses manga recommendation */
+/* diplays img and name */
+.mangaRecommend {
+    border: none;
+    text-align: center;
+}

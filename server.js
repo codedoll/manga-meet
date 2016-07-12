@@ -17,9 +17,22 @@ app.use(express.static('public'));
 var mangaController = require('./controllers/mangaController');
 var userController = require('./controllers/userController');
 
+var Manga = require('./models/manga_model.js');
+
 
 app.use('/manga', mangaController);
 app.use('/user', userController);
+
+
+// MANGA GET ROUTE to INDEX.HTML
+app.get('/manga', function(req, res) {
+	Manga.find(function(err, manga) {
+		res.send(manga);
+		console.log(manga);
+	});
+});
+// end manga route
+
 
 app.get('*', function(req, res){
   res.redirect('/');

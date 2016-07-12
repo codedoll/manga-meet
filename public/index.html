@@ -26,14 +26,16 @@
 
     <!-- MANGA VOLUMES READING -->
     <div>
-    <h1>Books reading</h1>
-    	<div id="currentReadHolder">
+    <h1>Mangas reading</h1>
+
+        <div id="currentReadHolder">
+
+<!-- ng-repeat="user in ctrl.usersEven | limitTo:3" -->
     		<div class="currentRead">volume 1</div>
     		<div class="currentRead">volume 2</div>
     		<div class="currentRead">volume 3</div>
     		<div class="currentRead">volume 4</div>
     		<div class="currentRead">volume 5</div>
-
     	</div>
     </div>
     <!-- end manga volumes reading -->
@@ -41,13 +43,16 @@
 
     <!-- RECOMMENDED MANGAS -->
     <div>
-    <h1>Books reading</h1>
+    <h1>Recommended Mangas</h1>
     	<div id="recommendReadHolder">
-    		<div class="recommendRead">recommended manga 1</div>
-    		<div class="recommendRead">recommended manga 2</div>
-    		<div class="recommendRead">recommended manga 3</div>
-    		<div class="recommendRead">recommended manga 4</div>
-    		<div class="recommendRead">recommended manga 5</div>
+        <div id="currentReadHolder" ng-controller="MangaIndexController as mctrl">
+        <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:5 ">
+        <div class= "mangaRecommend">
+            <img src="{{manga.image_url_med}}">
+            <br/>
+            {{manga.title_english}}
+        </div>
+        </div>
 
     	</div>
     </div>
