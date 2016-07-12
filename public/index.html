@@ -11,6 +11,8 @@
 
 <body ng-controller="MainController as ctrl">
     <!-- HEADER FOR HOMEPAGE -->
+
+
     <div id="home-header">
         <div class="headerDiv" id="header-title">
             MangaMeet
@@ -21,43 +23,56 @@
                 <input type="text" name="" ng-model="loginform.password" placeholder="password">
                 <input type="submit">
             </form>
+                <div>
+                User logged is: <em>{{ctrl.usernameLogged}}</em>
+                </div>
         </div>
     </div>
-
     <!-- MANGA VOLUMES READING -->
     <div>
-    <h1>Mangas reading</h1>
-
+        <h1>Mangas reading</h1>
         <div id="currentReadHolder">
-
-<!-- ng-repeat="user in ctrl.usersEven | limitTo:3" -->
-    		<div class="currentRead">volume 1</div>
-    		<div class="currentRead">volume 2</div>
-    		<div class="currentRead">volume 3</div>
-    		<div class="currentRead">volume 4</div>
-    		<div class="currentRead">volume 5</div>
-    	</div>
+            <!-- ng-repeat="user in ctrl.usersEven | limitTo:3" -->
+            <div class="currentRead">volume 1</div>
+            <div class="currentRead">volume 2</div>
+            <div class="currentRead">volume 3</div>
+            <div class="currentRead">volume 4</div>
+            <div class="currentRead">volume 5</div>
+        </div>
     </div>
     <!-- end manga volumes reading -->
 
-
     <!-- RECOMMENDED MANGAS -->
     <div>
-    <h1>Recommended Mangas</h1>
-    	<div id="recommendReadHolder">
-        <div id="currentReadHolder" ng-controller="MangaIndexController as mctrl">
-        <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:5 ">
-        <div class= "mangaRecommend">
-            <img src="{{manga.image_url_med}}">
-            <br/>
-            {{manga.title_english}}
+        <h1>Recommended Mangas</h1>
+        <div id="recommendReadHolder">
+            <div id="currentReadHolder" ng-controller="MangaIndexController as mctrl">
+                <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:10 | orderBy:random">
+                    <div class="mangaRecommend">
+                    <form ng-submit="mctrl.ownManga(manga)">
+                        <img src="{{manga.image_url_med}}">
+                        <br/> {{manga.title_english}}
+                        <br/>
+                        <input type="submit">
+                    </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
+        <!-- end recommended mangas -->
 
-    	</div>
+    <!-- MANGAS OWNED -->
+    <div>
+    <h1>Mangas owned</h1>
+    <div id="ownedMangaHolder" ng-controller="OwnedController as ownctrl">
+        <div class="currentRead" ng-repeat="ownedmanga in ownctrl.manga | limitTo:5 ">
+            <br/> <img src="{{ownedmanga.manga_cover}}">
+            <br/> {{ownedmanga.manga_title}}
+        </div>
     </div>
-    <!-- end recommended mangas -->
+</div>
 
+    <!-- end manga owned -->
 </body>
 
 </html>
