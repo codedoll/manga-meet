@@ -1,5 +1,13 @@
 var app = angular.module('MangaMeet', ['ngRoute']);
 
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+    $locationProvider.html5Mode({enabled: true}); 
+
+    $routeProvider.when('/',{
+        templateUrl: 'partial/home_page.html'
+    })
+}])
+
 // console.log('app.js loaded');
 app.controller('MainController', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
 
@@ -133,7 +141,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
             url: '/user/rented',
             method: 'GET'
         }).then(function(response) {
-            self.rentedManga = response.data
+            self.rented = response.data
         })
     };
 
