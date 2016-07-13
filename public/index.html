@@ -33,10 +33,12 @@
         <h1>Mangas reading</h1>
        <div id="rentedMangaHolder" ng-controller="RentedController as rctrl">
         <div class="currentRead" ng-repeat="rented in rctrl.manga | limitTo:5 ">
-            <br/> <img src="{{rented.manga_cover}}">
-            <br/> {{rented.manga_title}}
+            <br/> <img src="{{rented.image_url_med}}">
+            <br/> {{rented.title_english}}            <br/>
+
             <form ng-submit="rctrl.returnManga(rented.mangaID)">
-                <input type="submit">
+            <br/>
+                <input type="submit" value="return manga">
             </form>
         </div>
     </div>
@@ -46,16 +48,16 @@
 
     <!-- RECOMMENDED MANGAS -->
     <div>
-        <h1>Recommended Mangas</h1>
+        <h1>Recommended Mangas You Can Rent From Others</h1>
         <div id="recommendReadHolder">
             <div id="currentReadHolder" ng-controller="MangaIndexController as mctrl">
-                <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:10 | orderBy:random">
+                <div class="currentRead" ng-repeat="manga in mctrl.othersManga | limitTo:10 | orderBy:random">
                     <div class="mangaRecommend">
-                    <form ng-submit="mctrl.ownManga(manga)">
+                    <form ng-submit="mctrl.rentManga(manga)">
                         <img src="{{manga.image_url_med}}">
                         <br/> {{manga.title_english}}
                         <br/>
-                        <input type="submit">
+                        <input type="submit" value="borrow">
                     </form>
                     </div>
                 </div>
@@ -68,17 +70,35 @@
     <h1>Mangas owned</h1>
     <div id="ownedMangaHolder" ng-controller="OwnedController as ownctrl">
         <div class="currentRead" ng-repeat="ownedmanga in ownctrl.manga ">
-            <br/> <img src="{{ownedmanga.manga_cover}}">
-            <br/> {{ownedmanga.manga_title}}
+            <br/> <img src="{{ownedmanga.image_url_med}}">
+            <br/> {{ownedmanga.title_english}}
             <form ng-submit="ownctrl.delete(ownedmanga)">
                         
-                        <input type="submit">
+                        <input type="submit" value="delete">
                     </form>
         </div>
     </div>
 </div>
-
     <!-- end manga owned -->
+
+        <!-- DO YOU OWN THESE MANGAS -->
+    <div>
+        <h1>Do you own these titles?</h1>
+        <div id="claimTitleHolder">
+            <div id="currentReadHolder" ng-controller="MangaIndexController as mctrl">
+                <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:10 | orderBy:random">
+                    <div class="mangaRecommend">
+                    <form ng-submit="mctrl.claim(manga)">
+                        <img src="{{manga.image_url_med}}">
+                        <br/> {{manga.title_english}}
+                        <br/>
+                        <input type="submit" value="I own this">
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end recommended mangas -->
 </body>
 
 </html>
