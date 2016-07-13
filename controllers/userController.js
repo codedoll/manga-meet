@@ -56,7 +56,35 @@ router.get('/ownmanga', function(req, res) {
 // end get mangas user owns
 
 
+// GET MANGAS USER RENTED FROM OTHERS
+router.get('/rented', function(req, res) {
+    var userRent = req.session.username;
+    UserManga.find({"usernameRenting": userRent }, function(err, manga) {
+        // shuffle(manga)
+        res.send(manga);
+    });
+});
 
+// end get mangas user owns
+
+
+// RETURNING MANGAS
+router.put('/returnmanga', function(req, res) {
+    UserManga.findOneAndUpdate({"usernameRenting": req.body.usernameRenting}, {"usernameRenting": "NONE"} , { new: true }, function(err, user) {
+        res.send(user);
+    });
+});
+// mangas returned
+
+
+//DELETE MANGA FROM USER
+router.delete('/delete', function(req, res) {
+    console.log(req.body.manga._id);
+    UserManga.findByIdAndRemove(req.body.manga._id, function(err, data){
+    res.send(data)
+  })
+});
+//
 
 // LOGIN ROUTE
 router.get('/:id', function(req, res) {

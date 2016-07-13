@@ -21,15 +21,8 @@ div {
     height: 150px;
 }
 
-#currentReadHolder, #recommendReadHolder, #ownedMangaHolder {
-   display: -webkit-flex;
-   display: flex;
-   -webkit-flex-direction: row /* works with row or column */
-   flex-direction: row;
-   -webkit-align-items: center;
-   align-items: center;
-   -webkit-justify-content: center;
-   justify-content: center;
+#currentReadHolder, #recommendReadHolder, #ownedMangaHolder, #rentedMangaHolder {
+   display: inline-block;
    /*http://www.sketchingwithcss.com/samplechapter/cheatsheet.html*/
 }
 

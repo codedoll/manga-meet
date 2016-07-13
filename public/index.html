@@ -2,8 +2,8 @@
 <html ng-app="MangaMeet">
 
 <head>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.js"></script>
+    <script type="text/javascript" src="angular.js"></script>
+    <script type="text/javascript" src="angular-route.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <title></title>
@@ -31,14 +31,16 @@
     <!-- MANGA VOLUMES READING -->
     <div>
         <h1>Mangas reading</h1>
-        <div id="currentReadHolder">
-            <!-- ng-repeat="user in ctrl.usersEven | limitTo:3" -->
-            <div class="currentRead">volume 1</div>
-            <div class="currentRead">volume 2</div>
-            <div class="currentRead">volume 3</div>
-            <div class="currentRead">volume 4</div>
-            <div class="currentRead">volume 5</div>
+       <div id="rentedMangaHolder" ng-controller="RentedController as rctrl">
+        <div class="currentRead" ng-repeat="rented in rctrl.manga | limitTo:5 ">
+            <br/> <img src="{{rented.manga_cover}}">
+            <br/> {{rented.manga_title}}
+            <form ng-submit="rctrl.returnManga(rented.mangaID)">
+                <input type="submit">
+            </form>
         </div>
+    </div>
+    </div>
     </div>
     <!-- end manga volumes reading -->
 
@@ -65,9 +67,13 @@
     <div>
     <h1>Mangas owned</h1>
     <div id="ownedMangaHolder" ng-controller="OwnedController as ownctrl">
-        <div class="currentRead" ng-repeat="ownedmanga in ownctrl.manga | limitTo:5 ">
+        <div class="currentRead" ng-repeat="ownedmanga in ownctrl.manga ">
             <br/> <img src="{{ownedmanga.manga_cover}}">
             <br/> {{ownedmanga.manga_title}}
+            <form ng-submit="ownctrl.delete(ownedmanga)">
+                        
+                        <input type="submit">
+                    </form>
         </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ var userMangaSchema = mongoose.Schema({
 	"manga_title" : String,
 	"manga_cover" : String,
 	"volumes" : String,
+	"usernameRenting" : String,
 	"rentedOut" : Boolean
 }, { strict : true });
 
