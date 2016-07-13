@@ -115,10 +115,9 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
             data: {
                 "mangaID": manga.mangaID
             }
-        })
-        // .then(function(result) {
-        //     console.log(result.data);
-        // });
+        }).then(function(result) {
+            console.log(result.data);
+        });
     };
 
 
@@ -150,7 +149,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 
 
     this.delete = function(manga) {
-        // console.log(manga._id);
+        console.log(manga._id);
         $http({
             method: 'DELETE',
             url: '/user/delete',
