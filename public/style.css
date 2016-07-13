@@ -2,11 +2,20 @@ body {
 	/*background-color: red;*/
 }
 
+#home-header {
+    display: flex;
+}
+
 .headerDiv {
     display: inline-flex;
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     padding: 1em;
 }   
+
+#header-title {
+    display: flex;
+    width: 60%;
+}
 
 .currentRead, .recommendRead {
     display: inline-block;
