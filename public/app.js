@@ -40,13 +40,27 @@ app.controller('MainController', ['$http', '$scope', '$routeParams', function($h
 
 
 
-
 app.controller('MangaIndexController', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
 
     var self = this;
 
-    // get Manga to display on index
+    // get Manga from other users to display on index
     this.getManga = function() {
+        // console.log('getManga');
+        $http({
+            url: '/manga/forrent',
+            method: 'GET',
+            data: $scope.$parent.ctrl.usernameLogged,
+        }).then(function(response) {
+            self.othersManga = response.data
+        })
+    };
+    // end get Manga
+    this.getManga();
+
+
+    // get all Manga to display on index
+    this.allManga = function() {
         // console.log('getManga');
         $http({
             url: '/manga',
@@ -54,34 +68,49 @@ app.controller('MangaIndexController', ['$http', '$scope', '$routeParams', funct
         }).then(function(response) {
             // console.log(response.data);
             self.mangaCover = response.data
-                // self.mangaCover = response.data[0].title_english;
         })
     };
     // end get Manga
+    this.allManga();
 
-    this.ownManga = function(manga) {
-        // console.log(manga);
+    //
+
+    //claim a manga on button click
+        this.claim = function(manga) {
+        console.log(manga);
         // console.log($scope.$parent.ctrl.usernameLogged);
         $http({
             method: 'POST',
             url: '/user/ownmanga',
             data: {
-                "username": $scope.$parent.ctrl.usernameLogged,
+                "username":  $scope.$parent.ctrl.usernameLogged,
                 "mangaID": manga._id,
-                "volumes": "1,2,3",
-                "manga_title": manga.title_english,
-                "manga_cover": manga.image_url_med,
-                "usernameRenting" : "1",
-                "rentedOut": 1
+                "title_english": manga.title_english,
+                "image_url_med": manga.image_url_med,
+                "total_volumes": manga.total_volumes,
+                "usernameRenting": "",
+                "rentedOut": 0
             }
         }).then(function(result) {
             console.log(result.data);
         });
-
     };
 
-    this.getManga();
 
+    //rents manga from the recommended mangas
+    this.rentManga = function(manga) {
+        console.log(manga);
+        // console.log($scope.$parent.ctrl.usernameLogged);
+        $http({
+            method: 'PUT',
+            url: '/user/rent',
+            data: {
+                "mangaID": manga.mangaID
+            }
+        }).then(function(result) {
+            console.log(result.data);
+        });
+    };
 
 
 
@@ -92,7 +121,7 @@ app.controller('MangaIndexController', ['$http', '$scope', '$routeParams', funct
 app.controller('OwnedController', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
 
     var self = this;
-    // // get Mangas Owned to display on index
+    // get Mangas Owned to display on index
     this.ownedManga = function() {
         $http({
             url: '/user/ownmanga',
@@ -102,25 +131,26 @@ app.controller('OwnedController', ['$http', '$scope', '$routeParams', function($
             self.manga = response.data;
         })
     };
-    // // end get Manga
+    // end get owned Manga
 
     this.ownedManga();
 
 
-        this.delete = function(manga) {
-            console.log(manga._id);
-            $http({
-                method: 'DELETE',
-                url: '/user/delete',
-                data: {manga: manga}, 
-                headers: {"Content-Type": "application/json;charset=utf-8"}
-            //     data:  {
-            //     manga: manga._id
-            // }
-            }).then(function() {
-                // window.location.pathname = "/";
-            })
-        }
+    this.delete = function(manga) {
+        console.log(manga._id);
+        $http({
+            method: 'DELETE',
+            url: '/user/delete',
+            data: {
+                manga: manga
+            },
+            headers: {
+                "Content-Type": "application/json;charset=utf-8"
+            }
+        }).then(function() {
+            // window.location.pathname = "/";
+        })
+    }
 }]); // end MangaIndexController
 
 
@@ -146,8 +176,7 @@ app.controller('RentedController', ['$http', '$scope', '$routeParams', function(
             method: 'PUT',
             url: '/user/returnmanga',
             data: {
-                "mangaID" : mangaID,
-                "usernameRenting" : $scope.$parent.ctrl.usernameLogged 
+                "mangaID": mangaID,
             }
         }).then(function(result) {
             console.log(result.data);

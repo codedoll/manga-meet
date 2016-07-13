@@ -37,7 +37,6 @@ router.get('/sessionchecker', function(req, res){
 router.post('/ownmanga', function(req, res) {
 	UserManga.create(req.body, function(err, data) {
 		res.send(data);
-		console.log(data);
 	});
 });
 // end
@@ -64,13 +63,24 @@ router.get('/rented', function(req, res) {
         res.send(manga);
     });
 });
-
 // end get mangas user owns
 
 
+// RENT MANGA FROM OTHERS
+router.put('/rent', function(req, res) {
+    console.log(typeof req.body.mangaID);
+    var mangaID = req.body.mangaID;
+    // console.log(mangaID + " is " + typeof mangaID);
+    UserManga.findOneAndUpdate({"mangaID": mangaID},{"usernameRenting": req.session.username}, function(err, user) {
+        res.send(user);
+        console.log(user);
+    });
+});
+//
+
 // RETURNING MANGAS
 router.put('/returnmanga', function(req, res) {
-    UserManga.findOneAndUpdate({"usernameRenting": req.body.usernameRenting}, {"usernameRenting": "NONE"} , { new: true }, function(err, user) {
+    UserManga.findOneAndUpdate({"usernameRenting": req.session.username}, {"usernameRenting": ""} , function(err, user) {
         res.send(user);
     });
 });
@@ -79,7 +89,6 @@ router.put('/returnmanga', function(req, res) {
 
 //DELETE MANGA FROM USER
 router.delete('/delete', function(req, res) {
-    console.log(req.body.manga._id);
     UserManga.findByIdAndRemove(req.body.manga._id, function(err, data){
     res.send(data)
   })

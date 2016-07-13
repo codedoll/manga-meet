@@ -1,7 +1,27 @@
 var express = require('express');
-var router = express.Router();
+var router = express.Router(),
+	session = require('express-session'),
+	shuffle = require('shuffle-array');
 
 var Manga = require('../models/manga_model.js');
+var UserManga = require('../models/userManga_model.js')
+
+// MANGA GET ROUTE to INDEX.HTML
+// Depends on what users own
+router.get('/forrent', function(req, res) {
+    {
+            UserManga.find(
+            {
+                "username": { '$ne': req.session.username },
+                 "usernameRenting": ""
+            }, 
+            function(err, manga) {
+                shuffle(manga)
+                res.send(manga);
+            });
+    }
+})
+
 
 var mangaInfo = [
 {"id":1,"title_romaji":"Monster","type":"Manga","adult":false,"popularity":1265,"title_japanese":"モンスター","title_english":"Monster","synonyms":[],"image_url_lge":"http://anilist.co/img/dir/manga/reg/1.jpg","image_url_med":"http://anilist.co/img/dir/manga/med/1.jpg","publishing_status":"finished","average_score":"84.8","total_chapters":162,"total_volumes":18,"relation_type":null,"role":null},
