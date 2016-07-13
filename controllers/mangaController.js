@@ -10,20 +10,17 @@ var UserManga = require('../models/userManga_model.js')
 // Depends on what users own
 router.get('/forrent', function(req, res) {
     {
-        price: {
-            UserManga.find({
+            UserManga.find(
+            {
                 "username": { '$ne': req.session.username },
-                 "userRenting": { '$ne': req.session.username }
-            }, function(err, manga) {
-                // shuffle(manga)
+                 "usernameRenting": ""
+            }, 
+            function(err, manga) {
+                shuffle(manga)
                 res.send(manga);
             });
-        }
     }
 })
-
-
-// end manga route
 
 
 var mangaInfo = [
