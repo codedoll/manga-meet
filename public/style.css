@@ -1,5 +1,5 @@
 body {
-	/*background-color: red;*/
+    /*background-color: red;*/
 }
 
 #home-header {
@@ -10,14 +10,15 @@ body {
     display: inline-flex;
     /*border: 2px solid black;*/
     padding: 1em;
-}   
+}
 
 #header-title {
     display: flex;
     width: 60%;
 }
 
-.currentRead, .recommendRead {
+.currentRead,
+.recommendRead {
     display: inline-block;
     padding: 1em;
     margin: 1em;
@@ -25,12 +26,19 @@ body {
     height: 150px;
 }
 
-#currentReadHolder, #recommendReadHolder, #ownedMangaHolder, #rentedMangaHolder {
-   display: inline-block;
+#currentReadHolder,
+#recommendReadHolder,
+#ownedMangaHolder,
+#rentedMangaHolder {
+    display: inline-block;
 }
 
+
 /* div that houses manga recommendation */
+
+
 /* diplays img and name */
+
 .mangaRecommend {
     border: none;
     text-align: center;
@@ -38,12 +46,19 @@ body {
 
 .flex {
     display: -webkit-flex;
-   display: flex;
-   -webkit-flex-direction: row /* works with row or column */
-   flex-direction: row;
-   -webkit-align-items: center;
-   align-items: center;
-   -webkit-justify-content: center;
-   justify-content: center;
-   /*http://www.sketchingwithcss.com/samplechapter/cheatsheet.html*/
+    display: flex;
+    -webkit-flex-direction: row/* works with row or column */
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    min-height: 194px;
+    border: 1px solid gray;
+}
+
+
+/*http://www.sketchingwithcss.com/samplechapter/cheatsheet.html*/
+
+
 }
