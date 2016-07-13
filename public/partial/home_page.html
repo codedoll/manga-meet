@@ -1,8 +1,9 @@
+
     <!-- MANGA VOLUMES READING -->
     <h1>Mangas reading</h1>
     <div class="flex">
         <div id="rentedMangaHolder">
-            <div class="currentRead" ng-repeat="rented in mctrl.rentedManga | limitTo:5 ">
+            <div class="currentRead" ng-repeat="rented in mctrl.rentedOutManga | limitTo:5 ">
                 <div class="mangaRecommend">
                     <br/> <img src="{{rented.image_url_med}}">
                     <br/> {{rented.title_english}}

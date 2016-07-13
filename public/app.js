@@ -4,7 +4,9 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     $locationProvider.html5Mode({enabled: true}); 
 
     $routeProvider.when('/',{
-        templateUrl: 'partial/home_page.html'
+        templateUrl: 'partial/home_page.html',
+        controller: 'MangaController',
+        controllerAs: 'mctrl'
     })
 }])
 
@@ -60,6 +62,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
             method: 'GET',
             data: $scope.$parent.ctrl.usernameLogged,
         }).then(function(response) {
+            // console.log(response)
             self.othersManga = response.data
         })
     };
@@ -85,7 +88,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 
     //claim a manga on button click
     this.claim = function(manga) {
-        console.log(manga);
+        // console.log(manga);
         // console.log($scope.$parent.ctrl.usernameLogged);
         $http({
             method: 'POST',
@@ -100,14 +103,14 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
                 "rentedOut": 0
             }
         }).then(function(result) {
-            console.log(result.data);
+            // console.log(result.data);
         });
     };
 
 
-    //rents manga from the recommended mangas
+    //rents manga from the mmended mangas
     this.rentManga = function(manga) {
-        console.log(manga);
+        // console.log(manga);
         // console.log($scope.$parent.ctrl.usernameLogged);
         $http({
             method: 'PUT',
@@ -116,7 +119,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
                 "mangaID": manga.mangaID
             }
         }).then(function(result) {
-            console.log(result.data);
+            // console.log(result.data);
         });
     };
 
@@ -141,7 +144,8 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
             url: '/user/rented',
             method: 'GET'
         }).then(function(response) {
-            self.rented = response.data
+            self.rentedOutManga = response.data;
+            self.reloadView();
         })
     };
 
@@ -181,11 +185,10 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 
 
     this.reloadView = function() {
-        self.getManga();
-        self.allManga();
+        // self.getManga();
         self.ownedManga();
         self.rentedManga();
-
+        // self.allManga();
     };
 
 
