@@ -46,7 +46,7 @@ router.post('/ownmanga', function(req, res) {
 router.get('/ownmanga', function(req, res) {
 	UserManga.find({"username": req.session.username}, function(err, manga) {
 		var data = manga;
-		shuffle(manga)
+		// shuffle(manga)
 		res.send(manga);
 		// console.log(manga);
 	});

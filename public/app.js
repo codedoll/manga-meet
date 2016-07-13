@@ -40,7 +40,7 @@ app.controller('MainController', ['$http', '$scope', '$routeParams', function($h
 
 
 
-app.controller('MangaIndexController', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
+app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', function($http, $scope, $routeParams, $route) {
 
     var self = this;
 
@@ -76,14 +76,14 @@ app.controller('MangaIndexController', ['$http', '$scope', '$routeParams', funct
     //
 
     //claim a manga on button click
-        this.claim = function(manga) {
+    this.claim = function(manga) {
         console.log(manga);
         // console.log($scope.$parent.ctrl.usernameLogged);
         $http({
             method: 'POST',
             url: '/user/ownmanga',
             data: {
-                "username":  $scope.$parent.ctrl.usernameLogged,
+                "username": $scope.$parent.ctrl.usernameLogged,
                 "mangaID": manga._id,
                 "title_english": manga.title_english,
                 "image_url_med": manga.image_url_med,
@@ -113,27 +113,31 @@ app.controller('MangaIndexController', ['$http', '$scope', '$routeParams', funct
     };
 
 
-
-}]); // end MangaIndexController
-
-
-
-app.controller('OwnedController', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
-
-    var self = this;
-    // get Mangas Owned to display on index
     this.ownedManga = function() {
         $http({
             url: '/user/ownmanga',
             method: 'GET',
         }).then(function(response) {
             // console.log(response.data);
-            self.manga = response.data;
+            self.owned = response.data;
         })
     };
     // end get owned Manga
 
     this.ownedManga();
+
+
+    // FINDS RENTED MANGA IN DB
+    this.rentedManga = function() {
+        $http({
+            url: '/user/rented',
+            method: 'GET'
+        }).then(function(response) {
+            self.rentedManga = response.data
+        })
+    };
+
+    this.rentedManga();
 
 
     this.delete = function(manga) {
@@ -151,22 +155,6 @@ app.controller('OwnedController', ['$http', '$scope', '$routeParams', function($
             // window.location.pathname = "/";
         })
     }
-}]); // end MangaIndexController
-
-
-app.controller('RentedController', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
-    var self = this;
-
-    this.rentedManga = function() {
-        $http({
-            url: '/user/rented',
-            method: 'GET'
-        }).then(function(response) {
-            self.manga = response.data
-        })
-    };
-
-    this.rentedManga();
 
 
     this.returnManga = function(mangaID) {
@@ -184,5 +172,13 @@ app.controller('RentedController', ['$http', '$scope', '$routeParams', function(
     }
 
 
+    this.reloadView = function() {
+        self.getManga();
+        self.allManga();
+        self.ownedManga();
+        self.rentedManga();
 
-}]); // end RentedController
+    };
+
+
+}]); // end MangaIndexController
