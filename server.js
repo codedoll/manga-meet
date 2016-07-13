@@ -1,4 +1,5 @@
-// require('dotenv').config();
+require('dotenv').config();
+var nani = require('nani').init(process.env.CLIENTID, process.env.SECRET);
 
 //Calling dependencies
 var express = require('express'),
@@ -35,6 +36,18 @@ var userController = require('./controllers/userController');
 
 app.use('/manga', mangaController);
 app.use('/user', userController);
+
+
+app.get('/bo/:id', function(req, res) {
+    nani.get('manga/search/' + req.params.id)
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+});
+
 
 
 // MANGA GET ROUTE to INDEX.HTML
