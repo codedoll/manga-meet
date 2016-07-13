@@ -2,10 +2,12 @@
 <html ng-app="MangaMeet">
 
 <head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script type="text/javascript" src="angular.js"></script>
     <script type="text/javascript" src="angular-route.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+
     <title></title>
 </head>
 
@@ -33,6 +35,7 @@
         <h1>Mangas reading</h1>
        <div id="rentedMangaHolder" ng-controller="RentedController as rctrl">
         <div class="currentRead" ng-repeat="rented in rctrl.manga | limitTo:5 ">
+         <div class="mangaRecommend">
             <br/> <img src="{{rented.image_url_med}}">
             <br/> {{rented.title_english}}            <br/>
 
@@ -40,6 +43,7 @@
             <br/>
                 <input type="submit" value="return manga">
             </form>
+            </div>
         </div>
     </div>
     </div>
