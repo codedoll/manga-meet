@@ -70,10 +70,14 @@ router.get('/rented', function(req, res) {
 
 // RENT MANGA FROM OTHERS
 router.put('/rent', function(req, res) {
-    console.log(typeof req.body.mangaID);
     var mangaID = req.body.mangaID;
+
     // console.log(mangaID + " is " + typeof mangaID);
-    UserManga.findOneAndUpdate({"mangaID": mangaID},{"usernameRenting": req.session.username}, function(err, user) {
+    UserManga.findOneAndUpdate({"mangaID": mangaID},{
+        "usernameRenting": req.session.username,
+         "date_borowed": req.body.date_borowed,
+         "date_due": req.body.date_due
+    }, function(err, user) {
         res.send(user);
         console.log(user);
     });
