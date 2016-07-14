@@ -7,8 +7,8 @@ var express = require('express'),
     mongoose = require('mongoose'),
     session = require('express-session'),
     bodyParser = require('body-parser'),
-   	shuffle = require('shuffle-array');
-
+   	shuffle = require('shuffle-array'),
+    path = require('path');
 
 var Manga = require('./models/manga_model.js');
 
@@ -37,11 +37,20 @@ var userController = require('./controllers/userController');
 app.use('/manga', mangaController);
 app.use('/user', userController);
 
+// SHOW ADMIN PAGE
+app.get('/admin', function(req, res) {
+  res.sendFile(path.resolve(__dirname + '/public/admin.html'));
 
-app.get('/bo/:id', function(req, res) {
-    nani.get('manga/search/' + req.params.id)
+});
+// end admin page
+
+app.post('/search/', function(req, res) {
+  console.log(req.body.data);
+  console.log('at search');
+    nani.get('manga/search/'+req.body.data)
         .then(data => {
             console.log(data);
+            res.send(data)
         })
         .catch(error => {
             console.log(error);

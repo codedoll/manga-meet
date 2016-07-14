@@ -212,3 +212,30 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 
 
 }]); // end MangaIndexController
+
+
+app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParams', '$route', '$q', function($http, $scope, $rootScope, $routeParams, $route, $q) {
+    
+    var self = this;
+
+    this.fromNani = function(data){
+        console.log(data);
+            $scope.dataLoaded = false;
+            $http({
+            method:'POST',
+            url: 'http://localhost:3000/search/',
+            data: {data:data}
+        }).then(function(response){
+                            $scope.dataLoaded = true;
+
+            self.data = response.data;
+            console.log(response);
+        },function(response){
+            //fail callback
+            console.log('fail');
+        })
+    }
+    
+
+
+}]); // end AdminController
