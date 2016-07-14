@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 var nani = require('nani').init(process.env.CLIENTID, process.env.SECRET);
 
 //Calling dependencies
@@ -76,7 +77,7 @@ app.get('*', function(req, res){
 //Database name is mange_meet
 
 var port = process.env.PORT || 3000
-var MONGODBURI = process.env.MONGODB_URI || 'mongodb://localhost/manga_meet'
+var MONGODBURI = process.env.MONGODB_URI
 mongoose.connect(MONGODBURI);
 
 app.listen(port);
