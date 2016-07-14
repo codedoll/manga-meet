@@ -75,8 +75,8 @@ app.get('*', function(req, res){
 
 //Database name is mange_meet
 
-mongoose.connect(MONGODBURI);
 var port = process.env.PORT || 3000
 var MONGODBURI = process.env.MONGODB_URI || 'mongodb://localhost/manga_meet'
+mongoose.connect(MONGODBURI);
 
 app.listen(port);
