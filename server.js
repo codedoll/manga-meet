@@ -13,8 +13,7 @@ var express = require('express'),
 var Manga = require('./models/manga_model.js');
 
 
-//Database name is mange_meet
-mongoose.connect('mongodb://localhost/manga_meet');
+
 
 app.use(session({
   cookieName: 'session',
@@ -74,4 +73,10 @@ app.get('*', function(req, res){
   res.redirect('/');
 });
 
-app.listen(3000);
+//Database name is mange_meet
+
+mongoose.connect(MONGODBURI);
+var port = process.env.PORT || 3000
+var MONGODBURI = process.env.MONGODB_URI || 'mongodb://localhost/manga_meet'
+
+app.listen(port);
