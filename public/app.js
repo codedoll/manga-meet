@@ -11,7 +11,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 }])
 
 // console.log('app.js loaded');
-app.controller('MainController', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
+app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', function($http, $route, $scope, $routeParams) {
 
     var self = this;
 
@@ -24,10 +24,11 @@ app.controller('MainController', ['$http', '$scope', '$routeParams', function($h
             url: '/user/' + loginform.username,
             method: 'GET'
         }).then(function(response) {
+            $route.reload();
+
             self.usernameLogged = response.data.sessionID;
 
         })
-        $state.reload();
     };
 
 
@@ -193,8 +194,8 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 
         // What we return here is the data that will be accessible 
         // to us after the promise resolves
-        console.log($scope);
-        $scope.mctrl.sayHello();
+        $route.reload();
+
 
     };
 
