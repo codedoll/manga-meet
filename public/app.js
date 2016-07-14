@@ -1,4 +1,4 @@
-var app = angular.module('MangaMeet', ['ngRoute', 'ngAnimate']);
+var app = angular.module('MangaMeet', ['ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true });
