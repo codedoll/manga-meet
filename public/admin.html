@@ -5,9 +5,10 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script type="text/javascript" src="angular.js"></script>
     <script type="text/javascript" src="angular-route.js"></script>
-      <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+     <link rel="stylesheet" type="text/css" href="bootstrap-bootwatch.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-        <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
     <title></title>
     <base href="/">
 </head>
@@ -15,21 +16,23 @@
 <body ng-controller="MainController as ctrl">
     <!-- HEADER FOR HOMEPAGE -->
     <main ng-controller="AdminController as actrl">
-        <div>
-            <form>
-                <input type="text" ng-model="form.query" ng-keyup="actrl.fromNani(form.query)" />
-                <br/>
-                <p class="text-center" ng-hide="dataLoaded">
-                    <i class="fa fa-spinner fa-spin"></i>
-                </p>
-                <div ng-show="dataLoaded">
-                    <ul class="currentRead" ng-repeat="manga in actrl.data | filter:{adult:false}:true">
-                        {{manga.title_english}}
-                        <br>
-                        <img src="{{manga.image_url_med}}">
-                    </ul>
-                </div>
+        <div id="adminSearchHolder">
+            <div id="adminTextBoxSearch">
+                <form id="adminSearchForm" ng-submit="actrl.fromNani(form.query)">
+                    <input id="adminSearchBox" type="text" ng-model="form.query" ng-keyup="actrl.fromNani(form.query)" />
+                    <br/>
+                    <p class="text-center" ng-hide="dataLoaded">
+                        <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+                    </p>
+            </div>
             </form>
+        </div>
+        <div ng-show="dataLoaded">
+            <ul class="currentRead" ng-repeat="manga in actrl.data | filter:{adult:false}:true">
+                <img src="{{manga.image_url_med}}">
+                <button> {{manga.title_english}} </button>
+
+            </ul>
         </div>
     </main>
 </body>

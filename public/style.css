@@ -42,7 +42,6 @@ body {
 .mangaRecommend {
     border: none;
     text-align: center;
-    
 }
 
 .flex {
@@ -62,9 +61,28 @@ body {
 /*http://www.sketchingwithcss.com/samplechapter/cheatsheet.html*/
 
 .box-one {
-  -webkit-transition:all linear 0.5s;
-  transition:all linear 0.5s;
+    -webkit-transition: all linear 0.5s;
+    transition: all linear 0.5s;
 }
+
 .box-one.ng-click {
-  opacity:0;
+    opacity: 0;
+}
+
+.fa-spin {
+    font-size: 3em;
+}
+
+#adminSearchHolder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#adminTextBoxSearch {
+    padding: 3em;
+}
+
+input#adminSearchBox {
+    width:25em;
 }

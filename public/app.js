@@ -24,9 +24,13 @@ app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', f
             url: '/user/' + loginform.username,
             method: 'GET'
         }).then(function(response) {
+            console.log(response.data);
+            if (response.data.user != "INVALID" ) {
+                self.usernameLogged = response.data.sessionID;
+                //flip partials to the user menu partials
+            }
+            
             $route.reload();
-
-            self.usernameLogged = response.data.sessionID;
 
         })
     };
@@ -168,7 +172,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
             self.rentedManga();
             self.getManga();
 
-            console.log(result.data);
+            // console.log(result.data);
         });
     }
 
@@ -206,7 +210,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
         self.rentedManga();
     };
 
-    this.sayHello = function () {
+    this.sayHello = function() {
         self.reloadView();
         alert("Hi")
     };
@@ -216,7 +220,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 
 
 app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParams', '$route', '$q', function($http, $scope, $rootScope, $routeParams, $route, $q) {
-    
+
     this.sayHello = function() {
         alert("HI")
     }
@@ -241,6 +245,6 @@ app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParam
         })
     }
 
-
+    // http://stackoverflow.com/questions/23490596/angularjs-loading-icon-whilst-waiting-for-data-data-calculation
 
 }]); // end AdminController

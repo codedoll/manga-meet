@@ -3,6 +3,8 @@ var express = require('express'),
     session = require('express-session'),
 	shuffle = require('shuffle-array');
 
+var isNull = require('is-null');
+
 var User = require('../models/user_model.js');
 var UserManga = require('../models/userManga_model.js')
 var Manga = require('../models/manga_model.js');
@@ -99,15 +101,22 @@ router.delete('/delete', function(req, res) {
 router.get('/:id', function(req, res) {
     var userID = req.params.id;
     User.findOne({ "username": userID }, function(err, user) {
-        // sets a cookie with the user's info
-        req.session.username = user.username;
-        res.send({
-            user: user,
-            sessionID: req.session.username
-        });
+        if (user == null) {
+            console.log("no user found");
+            res.send({ user: "INVALID" })
+        } else {
+            // sets a cookie with the user's info
+            req.session.username = user.username;
+            res.send({
+                user: user,
+                sessionID: req.session.username
+            });
+
+        }
     });
 
 });
+
 // end login route
 
 
