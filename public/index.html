@@ -8,6 +8,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+
     <title></title>
     <base href="/">
 </head>
@@ -40,7 +42,7 @@
         <!-- DO YOU OWN THESE MANGAS -->
         <div>
             <h1>Do you own these titles?</h1>
-            <div class="flex" id="claimTitleHolder">
+            <div class="flex" id="claimTitleHolder" ng-controller="MangaController as mctrl">
                     <div id="currentReadHolder" >
                         <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:10 | orderBy:random">
                             <div class="mangaRecommend">

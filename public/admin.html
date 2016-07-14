@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="MangaMeet">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script type="text/javascript" src="angular.js"></script>
+    <script type="text/javascript" src="angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title></title>
+    <base href="/">
+</head>
+
+<body ng-controller="MainController as ctrl">
+    <!-- HEADER FOR HOMEPAGE -->
+    <main ng-controller="AdminController as actrl">
+        <div>
+            <form>
+                <input type="text" ng-model="form.query" ng-keyup="actrl.fromNani(form.query)" />
+                <br/>
+                <p class="text-center" ng-hide="dataLoaded">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </p>
+                <div ng-show="dataLoaded">
+                    <ul class="currentRead" ng-repeat="manga in actrl.data | filter:{adult:false}:true">
+                        {{manga.title_english}}
+                        <br>
+                        <img src="{{manga.image_url_med}}">
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

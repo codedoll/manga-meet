@@ -11,7 +11,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 }])
 
 // console.log('app.js loaded');
-app.controller('MainController', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
+app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', function($http, $route, $scope, $routeParams) {
 
     var self = this;
 
@@ -24,10 +24,11 @@ app.controller('MainController', ['$http', '$scope', '$routeParams', function($h
             url: '/user/' + loginform.username,
             method: 'GET'
         }).then(function(response) {
+            $route.reload();
+
             self.usernameLogged = response.data.sessionID;
 
         })
-                    $state.reload();
     };
 
 
@@ -52,11 +53,6 @@ app.controller('MainController', ['$http', '$scope', '$routeParams', function($h
 app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', function($http, $scope, $routeParams, $route) {
 
     var self = this;
-
-    this.hello = function() {
-        console.log('HEY');
-    };
-
 
     // get Manga from other users to display on index
     this.getManga = function() {
@@ -90,31 +86,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 
     //
 
-    //claim a manga on button click
-    this.claim = function(manga) {
-        // console.log(manga);
-        // console.log($scope.$parent.ctrl.usernameLogged);
-    console.log('message');
-        $http({
-            method: 'POST',
-            url: '/user/ownmanga',
-            data: {
-                "username": $scope.$parent.ctrl.usernameLogged,
-                "mangaID": manga._id,
-                "title_english": manga.title_english,
-                "image_url_med": manga.image_url_med,
-                "total_volumes": manga.total_volumes,
-                "usernameRenting": "",
-                "rentedOut": 0
-            }
-        }).then(function(result){
 
-            // What we return here is the data that will be accessible 
-            // to us after the promise resolves
-            self.ownedManga();
-            self.reloadView();
-        });
-    };
 
 
     //rents manga from the recommended mangas
@@ -144,8 +116,6 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
         }).then(function(response) {
             // console.log(response.data);
             self.owned = response.data;
-
-
         })
 
     };
@@ -203,6 +173,31 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
     }
 
 
+    //claim a manga on button click
+    this.claim = function(manga) {
+        // console.log(manga);
+        // console.log($scope.$parent.ctrl.usernameLogged);
+        console.log('CLAIMED');
+        $http({
+            method: 'POST',
+            url: '/user/ownmanga',
+            data: {
+                "username": $scope.$parent.ctrl.usernameLogged,
+                "mangaID": manga._id,
+                "title_english": manga.title_english,
+                "image_url_med": manga.image_url_med,
+                "total_volumes": manga.total_volumes,
+                "usernameRenting": "",
+                "rentedOut": 0
+            }
+        })
+
+        // What we return here is the data that will be accessible 
+        // to us after the promise resolves
+        $route.reload();
+
+
+    };
 
     this.reloadView = function() {
         console.log('reloadView');
@@ -211,7 +206,37 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
         self.rentedManga();
     };
 
-
+    this.sayHello = function () {
+        self.reloadView();
+        alert("Hi")
+    };
 
 
 }]); // end MangaIndexController
+
+
+app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParams', '$route', '$q', function($http, $scope, $rootScope, $routeParams, $route, $q) {
+    
+    var self = this;
+
+    this.fromNani = function(data){
+        console.log(data);
+            $scope.dataLoaded = false;
+            $http({
+            method:'POST',
+            url: 'http://localhost:3000/search/',
+            data: {data:data}
+        }).then(function(response){
+                            $scope.dataLoaded = true;
+
+            self.data = response.data;
+            console.log(response);
+        },function(response){
+            //fail callback
+            console.log('fail');
+        })
+    }
+    
+
+
+}]); // end AdminController
