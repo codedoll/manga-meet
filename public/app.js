@@ -224,7 +224,7 @@ app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParam
             $scope.dataLoaded = false;
             $http({
             method:'POST',
-            url: 'http://localhost:3000/search/',
+            url: '/search/',
             data: {data:data}
         }).then(function(response){
                             $scope.dataLoaded = true;
