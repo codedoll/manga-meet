@@ -31,7 +31,8 @@
         </div>
     </div>
 
-    <div id ='viewContainer'  ng-view>
+    <div id ='viewContainer'  ng-view >
+        <div ng-include="partial/home_page.html"></div>
     </div> <!--   end of view container -->
 
 
@@ -39,7 +40,7 @@
         <div>
             <h1>Do you own these titles?</h1>
             <div class="flex" id="claimTitleHolder">
-                    <div id="currentReadHolder" ng-controller="MangaController as mctrl">
+                    <div id="currentReadHolder" >
                         <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:10 | orderBy:random">
                             <div class="mangaRecommend">
                                 <form ng-submit="mctrl.claim(manga)">
