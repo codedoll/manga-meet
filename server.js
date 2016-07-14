@@ -44,18 +44,18 @@ app.get('/admin', function(req, res) {
 });
 // end admin page
 
-// app.post('/search/', function(req, res) {
-//   console.log(req.body.data);
-//   console.log('at search');
-//     nani.get('manga/search/'+req.body.data)
-//         .then(data => {
-//             console.log(data);
-//             res.send(data)
-//         })
-//         .catch(error => {
-//             console.log(error);
-//         });
-// });
+app.post('/search/', function(req, res) {
+  console.log(req.body.data);
+  console.log('at search');
+    nani.get('manga/search/'+req.body.data)
+        .then(data => {
+            console.log(data);
+            res.send(data)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+});
 
 
 
