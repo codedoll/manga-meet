@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+var nani = require('nani').init("codedoll-nzqbx", "cf3rXs48cV6nUshNYrUB9zZH3u");
+
 //Calling dependencies
 var express = require('express'),
     app     = express(),
@@ -11,9 +13,7 @@ var express = require('express'),
 
 var Manga = require('./models/manga_model.js');
 
-// var nani = require('nani').init(process.env.CLIENTID, process.env.SECRET);
-var port = process.env.PORT || 3000
-var MONGODBURI = process.env.MONGODB_URI
+
 
 
 app.use(session({
@@ -44,18 +44,18 @@ app.get('/admin', function(req, res) {
 });
 // end admin page
 
-// app.post('/search/', function(req, res) {
-//   console.log(req.body.data);
-//   console.log('at search');
-//     nani.get('manga/search/'+req.body.data)
-//         .then(data => {
-//             console.log(data);
-//             res.send(data)
-//         })
-//         .catch(error => {
-//             console.log(error);
-//         });
-// });
+app.post('/search/', function(req, res) {
+  console.log(req.body.data);
+  console.log('at search');
+    nani.get('manga/search/'+req.body.data)
+        .then(data => {
+            console.log(data);
+            res.send(data)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+});
 
 
 
@@ -76,6 +76,8 @@ app.get('*', function(req, res){
 
 //Database name is mange_meet
 
+var port = process.env.PORT || 3000
+var MONGODBURI = process.env.MONGODB_URI || 'mongodb://localhost/manga_meet'
 mongoose.connect(MONGODBURI);
 
 app.listen(port);
