@@ -44,7 +44,7 @@ app.get('/admin', function(req, res) {
 });
 // end admin page
 
-app.post('/search/', function(req, res) {
+app.post('/search', function(req, res) {
   console.log(req.body.data);
   console.log('at search');
     nani.get('manga/search/'+req.body.data)
