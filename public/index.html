@@ -40,7 +40,7 @@
         <!-- DO YOU OWN THESE MANGAS -->
         <div>
             <h1>Do you own these titles?</h1>
-            <div class="flex" id="claimTitleHolder">
+            <div class="flex" id="claimTitleHolder" ng-controller="MangaController as mctrl">
                     <div id="currentReadHolder" >
                         <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:10 | orderBy:random">
                             <div class="mangaRecommend">

@@ -27,7 +27,7 @@ app.controller('MainController', ['$http', '$scope', '$routeParams', function($h
             self.usernameLogged = response.data.sessionID;
 
         })
-                    $state.reload();
+        $state.reload();
     };
 
 
@@ -52,11 +52,6 @@ app.controller('MainController', ['$http', '$scope', '$routeParams', function($h
 app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', function($http, $scope, $routeParams, $route) {
 
     var self = this;
-
-    this.hello = function() {
-        console.log('HEY');
-    };
-
 
     // get Manga from other users to display on index
     this.getManga = function() {
@@ -90,31 +85,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 
     //
 
-    //claim a manga on button click
-    this.claim = function(manga) {
-        // console.log(manga);
-        // console.log($scope.$parent.ctrl.usernameLogged);
-    console.log('message');
-        $http({
-            method: 'POST',
-            url: '/user/ownmanga',
-            data: {
-                "username": $scope.$parent.ctrl.usernameLogged,
-                "mangaID": manga._id,
-                "title_english": manga.title_english,
-                "image_url_med": manga.image_url_med,
-                "total_volumes": manga.total_volumes,
-                "usernameRenting": "",
-                "rentedOut": 0
-            }
-        }).then(function(result){
 
-            // What we return here is the data that will be accessible 
-            // to us after the promise resolves
-            self.ownedManga();
-            self.reloadView();
-        });
-    };
 
 
     //rents manga from the recommended mangas
@@ -144,8 +115,6 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
         }).then(function(response) {
             // console.log(response.data);
             self.owned = response.data;
-
-
         })
 
     };
@@ -203,6 +172,31 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
     }
 
 
+    //claim a manga on button click
+    this.claim = function(manga) {
+        // console.log(manga);
+        // console.log($scope.$parent.ctrl.usernameLogged);
+        console.log('CLAIMED');
+        $http({
+            method: 'POST',
+            url: '/user/ownmanga',
+            data: {
+                "username": $scope.$parent.ctrl.usernameLogged,
+                "mangaID": manga._id,
+                "title_english": manga.title_english,
+                "image_url_med": manga.image_url_med,
+                "total_volumes": manga.total_volumes,
+                "usernameRenting": "",
+                "rentedOut": 0
+            }
+        })
+
+        // What we return here is the data that will be accessible 
+        // to us after the promise resolves
+        console.log($scope);
+        $scope.mctrl.sayHello();
+
+    };
 
     this.reloadView = function() {
         console.log('reloadView');
@@ -211,7 +205,10 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
         self.rentedManga();
     };
 
-
+    this.sayHello = function () {
+        self.reloadView();
+        alert("Hi")
+    };
 
 
 }]); // end MangaIndexController
