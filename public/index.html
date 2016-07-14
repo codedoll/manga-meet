@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script type="text/javascript" src="angular.js"></script>
     <script type="text/javascript" src="angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <title></title>
@@ -43,12 +44,10 @@
                     <div id="currentReadHolder" >
                         <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:10 | orderBy:random">
                             <div class="mangaRecommend">
-                                <form ng-submit="mctrl.claim(manga)">
                                     <img src="{{manga.image_url_med}}">
                                     <br/> {{manga.title_english}}
                                     <br/>
-                                    <input type="submit" value="I own this" ng-click="mctrl.reloadView()">
-                                </form>
+                                    <button class="box-one" ng-click="mctrl.claim(manga)">own this</button>
                             </div>
                         </div>
                     </div>

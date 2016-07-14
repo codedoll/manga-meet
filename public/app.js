@@ -1,9 +1,9 @@
-var app = angular.module('MangaMeet', ['ngRoute']);
+var app = angular.module('MangaMeet', ['ngRoute', 'ngAnimate']);
 
-app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
-    $locationProvider.html5Mode({enabled: true}); 
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode({ enabled: true });
 
-    $routeProvider.when('/',{
+    $routeProvider.when('/', {
         templateUrl: 'partial/home_page.html',
         controller: 'MangaController',
         controllerAs: 'mctrl'
@@ -20,15 +20,14 @@ app.controller('MainController', ['$http', '$scope', '$routeParams', function($h
     // login function
     // the function for submit button on login form gets the user data from DB
     this.loginForm = function(loginform) {
-
-        // console.log(loginform.username);
-
         $http({
             url: '/user/' + loginform.username,
             method: 'GET'
         }).then(function(response) {
             self.usernameLogged = response.data.sessionID;
+
         })
+                    $state.reload();
     };
 
 
@@ -53,6 +52,11 @@ app.controller('MainController', ['$http', '$scope', '$routeParams', function($h
 app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', function($http, $scope, $routeParams, $route) {
 
     var self = this;
+
+    this.hello = function() {
+        console.log('HEY');
+    };
+
 
     // get Manga from other users to display on index
     this.getManga = function() {
@@ -90,6 +94,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
     this.claim = function(manga) {
         // console.log(manga);
         // console.log($scope.$parent.ctrl.usernameLogged);
+    console.log('message');
         $http({
             method: 'POST',
             url: '/user/ownmanga',
@@ -102,31 +107,34 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
                 "usernameRenting": "",
                 "rentedOut": 0
             }
-        }).then(function(result) {
-            // console.log(result.data);
+        }).then(function(result){
+
+            // What we return here is the data that will be accessible 
+            // to us after the promise resolves
+            self.ownedManga();
+            self.reloadView();
         });
     };
 
 
-    //rents manga from the mmended mangas
+    //rents manga from the recommended mangas
     this.rentManga = function(manga) {
         // console.log(manga);
         // console.log($scope.$parent.ctrl.usernameLogged);
         $http({
-            method: 'PUT',
-            url: '/user/rent',
-            data: {
-                "mangaID": manga.mangaID
-            }
-        })
-        // .then(function(result) {
-        //     console.log(result.data);
-        // });
+                method: 'PUT',
+                url: '/user/rent',
+                data: {
+                    "mangaID": manga.mangaID
+                }
+            })
+            .then(function(result) {
+                self.getManga();
+                self.rentedManga();
 
-        .then(function(result) {
-            // console.log(result.data);
-        });
+            });
     };
+
 
 
     this.ownedManga = function() {
@@ -136,7 +144,10 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
         }).then(function(response) {
             // console.log(response.data);
             self.owned = response.data;
+
+
         })
+
     };
     // end get owned Manga
 
@@ -150,15 +161,15 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
             method: 'GET'
         }).then(function(response) {
             self.rentedOutManga = response.data;
-            self.reloadView();
+            // self.reloadView();
         })
     };
 
     this.rentedManga();
 
 
-    this.delete = function(manga) {
-        // console.log(manga._id);
+    self.delete = function(manga) {
+        console.log(manga._id);
         $http({
             method: 'DELETE',
             url: '/user/delete',
@@ -168,15 +179,15 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
             headers: {
                 "Content-Type": "application/json;charset=utf-8"
             }
-        }).then(function() {
-            // window.location.pathname = "/";
         })
+
+        self.reloadView();
     }
 
 
     this.returnManga = function(mangaID) {
-        // console.log('clicked return');
-        // console.log(manga);
+        console.log('clicked return');
+        // console.log(mangaID);
         $http({
             method: 'PUT',
             url: '/user/returnmanga',
@@ -184,17 +195,23 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
                 "mangaID": mangaID,
             }
         }).then(function(result) {
+            self.rentedManga();
+            self.getManga();
+
             console.log(result.data);
         });
     }
 
 
+
     this.reloadView = function() {
-        // self.getManga();
+        console.log('reloadView');
+        self.getManga();
         self.ownedManga();
         self.rentedManga();
-        // self.allManga();
     };
+
+
 
 
 }]); // end MangaIndexController

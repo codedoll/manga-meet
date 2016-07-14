@@ -3,15 +3,13 @@
     <h1>Mangas reading</h1>
     <div class="flex">
         <div id="rentedMangaHolder">
-            <div class="currentRead" ng-repeat="rented in mctrl.rentedOutManga | limitTo:5 ">
+            <div class="currentRead" ng-repeat="rented in mctrl.rentedOutManga ">
                 <div class="mangaRecommend">
                     <br/> <img src="{{rented.image_url_med}}">
                     <br/> {{rented.title_english}}
                     <br/>
-                    <form ng-submit="mctrl.returnManga(rented.mangaID)">
                         <br/>
-                        <input type="submit" value="return manga" ng-click="mctrl.reloadView()">
-                    </form>
+                        <button ng-click="mctrl.returnManga(rented.mangaID)">return manga</button>
                 </div>
             </div>
         </div>
@@ -24,14 +22,12 @@
         <div class="flex">
             <div id="recommendReadHolder">
                 <div id="currentReadHolder">
-                    <div class="currentRead" ng-repeat="others in mctrl.othersManga | limitTo:10 | orderBy:random">
+                    <div class="currentRead" ng-repeat="others in mctrl.othersManga | orderBy:random">
                         <div class="mangaRecommend">
-                            <form ng-submit="mctrl.rentManga(others)">
                                 <img src="{{others.image_url_med}}">
                                 <br/> {{others.title_english}}
                                 <br/>
-                                <input type="submit" value="borrow" ng-click="mctrl.reloadView()">
-                            </form>
+                                <button ng-click="mctrl.rentManga(others)">rent manga</button>
                         </div>
                     </div>
                 </div>
@@ -42,7 +38,7 @@
         <div>
             <h1>Mangas owned</h1>
             <div class="flex">
-                <div id="ownedMangaHolder" ng-controller="MangaController as mctrl">
+                <div id="ownedMangaHolder">
                     <div class="currentRead" ng-repeat="ownedmanga in mctrl.owned ">
                         <br/> <img src="{{ownedmanga.image_url_med}}">
                         <br/> {{ownedmanga.title_english}}
