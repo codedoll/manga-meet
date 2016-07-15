@@ -31,13 +31,13 @@
                 <h1>MangaMeet</h1>
             </div>
             <div class="headerDiv" id="login-partial">
-                <form ng-submit="ctrl.loginForm(loginform)">
+                <form ng-submit="ctrl.loginForm(loginform)" ng-if="ctrl.usernameLogged == GUEST">
                     <input type="text" name="" ng-model="loginform.username" placeholder="username">
                     <input type="text" name="" ng-model="loginform.password" placeholder="password">
                     <input type="submit">
                 </form>
-                <div>
-                    User logged is: <em>{{ctrl.usernameLogged}}</em>
+                <div ng-if="ctrl.usernameLogged != GUEST">
+                    User logged is: {{ctrl.usernameLogged}}
                     <br>
                     <button ng-click="ctrl.logout()">logout</button>
                 </div>
