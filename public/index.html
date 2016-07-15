@@ -2,23 +2,21 @@
 <html ng-app="MangaMeet">
 
 <head>
-<link rel="stylesheet" type="text/css" href="https://bootswatch.com/lumen/bootstrap.css">
-<script type="text/javascript" src="angular.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.js"></script>
-<script type="text/javascript" src="moment.min.js"></script>
-<script src="./angular-moment/angular-moment.js"></script>
-<script type="text/javascript" src="jquery-3.1.0.min.js"></script>
-<script type="text/javascript" src="app.js"></script>
-<link rel="stylesheet" type="text/css" href="style.css">
-<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
-<script src="angular-animate.js"></script>
-<script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
-<script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
-<script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/lumen/bootstrap.css">
+    <script type="text/javascript" src="angular.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.js"></script>
+    <script type="text/javascript" src="moment.min.js"></script>
+    <script src="./angular-moment/angular-moment.js"></script>
+    <script type="text/javascript" src="jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+    <script src="angular-animate.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>
     <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
-
-<script type="text/javascript" src="app.js"></script>
-
+    <script type="text/javascript" src="app.js"></script>
     <title></title>
     <base href="/">
 </head>
@@ -37,7 +35,7 @@
                     <input type="submit">
                 </form>
                 <div ng-if="ctrl.usernameLogged != GUEST">
-                   <h3> Hi, {{ctrl.usernameLogged}}! </h3>
+                    <h3> Hi, {{ctrl.usernameLogged}}! </h3>
                     <br>
                     <button ng-click="ctrl.logout()">logout</button>
                 </div>
@@ -49,8 +47,10 @@
         <!--   end of view container -->
         <!-- DO YOU OWN THESE MANGAS -->
         <div>
+            <div class="doYouOwn">
             <h1 ng-if="ctrl.usernameLogged != GUEST">Do you own these titles?</h1>
             <h1 ng-if="ctrl.usernameLogged == GUEST">Rent from other manga enthusiasts!</h1>
+            </div>
             <div class="flex" id="claimTitleHolder" ng-controller="MangaController as mctrl">
                 <div id="currentReadHolder">
                     <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:40 | orderBy:random">

@@ -187,3 +187,13 @@ h6.dueDate {
     -webkit-flex-direction: row;
     flex-direction: row;
 }
+
+.index-manga-owned.ng-scope {
+    /* align-items: center; */
+    text-align: center;
+}
+
+.doYouOwn {
+    text-align: center;
+    padding-top: 5em;
+}

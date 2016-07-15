@@ -11,7 +11,7 @@
                         <h6 class="dueDate daysLeft"> <span class="daysInDaysLeft">{{rented.date_due| amDifference : null : 'days'}}</span> days left</h6>
                         <h6 class="dueDate"> Return: {{rented.date_due | amUtc | amDateFormat:'MMMM DD YY'}}</h6>
                         <h6 class="dueDate">Borrowed: {{rented.date_borowed | amUtc | amDateFormat:'MMMM DD YY'}}</h6>
-                        <button class="btn btn-default" ng-click="mctrl.returnManga(rented)">return manga</button>
+                        <button class="btn btn-default" ng-click="mctrl.returnManga(rented)">return</button>
                     </div>
                 </div>
             </div>
@@ -25,12 +25,12 @@
     <div class="flex">
         <div id="recommendReadHolder">
             <div id="currentReadHolder">
-                <div class="currentRead" ng-repeat="others in mctrl.othersManga | limitTo: 6 | orderBy:random">
+                <div class="currentRead" ng-repeat="others in mctrl.othersManga | limitTo: 15 | orderBy:random">
                     <div class="mangaRecommend">
                         <img src="{{others.image_url_med}}">
                         <br/> {{others.title_english}}
                         <br/>
-                        <button class="btn btn-default" ng-click="mctrl.rentManga(others)">rent manga</button>
+                        <button class="btn btn-info" ng-click="mctrl.rentManga(others)">borrow</button>
                     </div>
                 </div>
             </div>
