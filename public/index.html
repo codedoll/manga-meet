@@ -37,27 +37,28 @@
                     <input type="submit">
                 </form>
                 <div ng-if="ctrl.usernameLogged != GUEST">
-                    User logged is: {{ctrl.usernameLogged}}
+                   <h3> Hi, {{ctrl.usernameLogged}}! </h3>
                     <br>
                     <button ng-click="ctrl.logout()">logout</button>
                 </div>
             </div>
         </div>
-        <div id='viewContainer' ng-view>
+        <div ng-if="ctrl.usernameLogged != GUEST" ng-view>
             <div ng-include="partial/home_page.html"></div>
         </div>
         <!--   end of view container -->
         <!-- DO YOU OWN THESE MANGAS -->
         <div>
-            <h1>Do you own these titles?</h1>
+            <h1 ng-if="ctrl.usernameLogged != GUEST">Do you own these titles?</h1>
+            <h1 ng-if="ctrl.usernameLogged == GUEST">Rent from other manga enthusiasts!</h1>
             <div class="flex" id="claimTitleHolder" ng-controller="MangaController as mctrl">
                 <div id="currentReadHolder">
-                    <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:10 | orderBy:random">
+                    <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:40 | orderBy:random">
                         <div class="mangaRecommend">
                             <img src="{{manga.image_url_med}}">
                             <br/> {{manga.title_english}}
                             <br/>
-                            <button class="box-one btn btn-primary" ng-click="mctrl.claim(manga)">own this</button>
+                            <button class="box-one btn btn-primary" ng-click="mctrl.claim(manga)" ng-if="ctrl.usernameLogged != GUEST">own this</button>
                         </div>
                     </div>
                 </div>
