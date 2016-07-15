@@ -1,0 +1,17 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/codedoll/manga-meet",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-strap": "^2.3.9"
+  }
+}

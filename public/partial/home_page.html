@@ -7,10 +7,10 @@
                 <div class="mangaRecommend">
                     <br/> <img src="{{rented.image_url_med}}">
                     <br/> {{rented.title_english}}
-                    <h6 class="dueDate"> {{rented.date_due| amDifference : null : 'days'}} days left</h6>
+                    <h6 class="dueDate daysLeft"> <span class="daysInDaysLeft">{{rented.date_due| amDifference : null : 'days'}}</span> days left</h6>
                     <h6 class="dueDate"> Return: {{rented.date_due | amUtc | amDateFormat:'MMMM DD YY'}}</h6>
                     <h6 class="dueDate">Borrowed: {{rented.date_borowed | amUtc | amDateFormat:'MMMM DD YY'}}</h6>
-                        <button ng-click="mctrl.returnManga(rented)">return manga</button>
+                        <button class="btn btn-default" ng-click="mctrl.returnManga(rented)">return manga</button>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                                 <img src="{{others.image_url_med}}">
                                 <br/> {{others.title_english}}
                                 <br/>
-                                <button ng-click="mctrl.rentManga(others)">rent manga</button>
+                                <button class="btn btn-default" ng-click="mctrl.rentManga(others)">rent manga</button>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                         <br/> <img src="{{ownedmanga.image_url_med}}">
                         <br/> {{ownedmanga.title_english}}
                         <form ng-submit="mctrl.delete(ownedmanga)">
-                            <input type="submit" value="delete" ng-click="mctrl.reloadView()">
+                            <input class="btn btn-danger" type="submit" value="delete" ng-click="mctrl.reloadView()">
                         </form>
                     </div>
                 </div>
