@@ -3,8 +3,6 @@ var express = require('express'),
     session = require('express-session'),
 	shuffle = require('shuffle-array');
 
-var isNull = require('is-null');
-
 var User = require('../models/user_model.js');
 var UserManga = require('../models/userManga_model.js')
 var UserReturn = require('../models/userReturn_model.js')
