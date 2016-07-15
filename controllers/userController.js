@@ -7,6 +7,7 @@ var isNull = require('is-null');
 
 var User = require('../models/user_model.js');
 var UserManga = require('../models/userManga_model.js')
+var UserReturn = require('../models/userReturn_model.js')
 var Manga = require('../models/manga_model.js');
 
 var path = require('path');
@@ -86,9 +87,19 @@ router.put('/rent', function(req, res) {
 
 // RETURNING MANGAS
 router.put('/returnmanga', function(req, res) {
-    UserManga.findOneAndUpdate({"usernameRenting": req.session.username}, {"usernameRenting": ""} , function(err, user) {
+    
+    var newUserReturn = new UserReturn(req.body);
+    newUserReturn.save();
+
+    UserManga.findOneAndUpdate({"usernameRenting": req.session.username}, 
+        {
+            "usernameRenting": "",
+            "date_borowed" : "",
+             "date_due" : "",
+           "date_returned" : ""
+        } , function(err, user) {
         res.send(user);
-    });
+     });
 });
 // mangas returned
 

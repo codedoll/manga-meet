@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var userMangaSchema = mongoose.Schema({
+var userReturnSchema = mongoose.Schema({
 	"username" : String,
 	"mangaID" : String,
 	"title_english" : String,
@@ -13,4 +13,4 @@ var userMangaSchema = mongoose.Schema({
 	"date_returned" : String
 }, { strict : true });
 
-module.exports= mongoose.model('UserManga', userMangaSchema);
+module.exports= mongoose.model('UserReturn', userReturnSchema);

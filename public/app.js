@@ -163,14 +163,20 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
     }
 
 
-    this.returnManga = function(mangaID) {
+    this.returnManga = function(returnedManga) {
         console.log('clicked return');
-        // console.log(mangaID);
+        console.log(returnedManga);
         $http({
             method: 'PUT',
             url: '/user/returnmanga',
             data: {
-                "mangaID": mangaID,
+                "mangaID": returnedManga.mangaID,
+                "date_returned" : moment(),
+                "date_borowed": moment()._d,
+                "date_due": moment().add(10, 'days')._d,
+                "usernameRenting": $scope.$parent.ctrl.usernameLogged,
+                "title_english": returnedManga.title_english,
+                "image_url_med": returnedManga.image_url_med,
             }
         }).then(function(result) {
             self.rentedManga();

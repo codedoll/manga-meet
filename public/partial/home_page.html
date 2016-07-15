@@ -10,7 +10,7 @@
                     <h6 class="dueDate"> {{rented.date_due| amDifference : null : 'days'}} days left</h6>
                     <h6 class="dueDate"> Return: {{rented.date_due | amUtc | amDateFormat:'MMMM DD YY'}}</h6>
                     <h6 class="dueDate">Borrowed: {{rented.date_borowed | amUtc | amDateFormat:'MMMM DD YY'}}</h6>
-                        <button ng-click="mctrl.returnManga(rented.mangaID)">return manga</button>
+                        <button ng-click="mctrl.returnManga(rented)">return manga</button>
                 </div>
             </div>
         </div>
