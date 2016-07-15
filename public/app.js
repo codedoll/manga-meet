@@ -16,6 +16,11 @@ app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', f
 
     var usernameLogged = "GUEST";
 
+    this.sayHello = function(manga) {
+        alert("at MainController. can read manga data. " + manga.title_english)
+    }
+
+
     // login function
     // the function for submit button on login form gets the user data from DB
     this.loginForm = function(loginform) {
@@ -259,9 +264,24 @@ app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParam
         })
     }
 
-    this.showData = function(data) {
-        console.log(data);
-        alert("from AdminController. clicked : " + data.title_english);
+// This is what "ADD MANGA" button does from modal.html
+// Adds data to collection "mangas" . Make sure data passed is correct.
+// Look at manga_model for properties.
+
+    this.addToMangaDB = function(data) {
+        // console.log(data);
+        // alert("from AdminController. clicked : " + data.title_english);
+        $http({
+            method: 'POST',
+            url: '/manga/addmanga',
+            data: data
+        }).then(function(response) {
+            console.log(response);
+        }, function(response) {
+            //fail callback
+            console.log('fail');
+        })
+
     }
 
     $scope.clickToOpen = function(manga) {
