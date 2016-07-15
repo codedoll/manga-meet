@@ -2,6 +2,10 @@ body {
     /*background-color: red;*/
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: 'Oxygen', sans-serif;
+}
+
 #home-header {
     display: flex;
 }
@@ -196,4 +200,9 @@ h6.dueDate {
 .doYouOwn {
     text-align: center;
     padding-top: 5em;
+}
+
+#mangameet-title {
+  font-family: 'Chewy', cursive;
+  font-size: 5em;
 }

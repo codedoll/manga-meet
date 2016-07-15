@@ -17,6 +17,8 @@
     <script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>
     <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
     <title></title>
     <base href="/">
 </head>
@@ -26,18 +28,17 @@
     <main ng-controller="MangaController as mctrl">
         <div id="home-header">
             <div class="headerDiv" id="header-title">
-                <h1>MangaMeet</h1>
+                <h1 id="mangameet-title">MangaMeet</h1>
             </div>
             <div class="headerDiv" id="login-partial">
                 <form ng-submit="ctrl.loginForm(loginform)" ng-if="ctrl.usernameLogged == GUEST">
-                    <input type="text" name="" ng-model="loginform.username" placeholder="username">
-                    <input type="text" name="" ng-model="loginform.password" placeholder="password">
-                    <input type="submit">
+                    <input type="text" name="" ng-model="loginform.username" placeholder="username" class="form-control">
+                    <input type="text" name="" ng-model="loginform.password" placeholder="password" class="form-control">
+                    <input type="submit" class="btn btn-default">
                 </form>
                 <div ng-if="ctrl.usernameLogged != GUEST">
                     <h3> Hi, {{ctrl.usernameLogged}}! </h3>
-                    <br>
-                    <button ng-click="ctrl.logout()">logout</button>
+                    <button class="btn btn-primary btn" ng-click="ctrl.logout()">logout</button>
                 </div>
             </div>
         </div>
