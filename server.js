@@ -38,7 +38,12 @@ app.use('/user', userController);
 
 // SHOW ADMIN PAGE
 app.get('/admin', function(req, res) {
-  res.sendFile(path.resolve(__dirname + '/public/admin.html'));
+  if(req.session.username == "Lyn" || req.session.username == "Joise") {
+      res.sendFile(path.resolve(__dirname + '/public/admin.html'));
+  }
+  else {
+    res.redirect('/')
+  }
 
 });
 // end admin page
