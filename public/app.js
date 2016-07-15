@@ -1,4 +1,4 @@
-var app = angular.module('MangaMeet', ['angularMoment','ngRoute', 'ngAnimate', 'mgcrea.ngStrap', 'mgcrea.ngStrap.modal', 'angularModalService']);
+var app = angular.module('MangaMeet', ['angularMoment', 'ngRoute', 'ngAnimate', 'ngDialog']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true });
@@ -14,7 +14,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', function($http, $route, $scope, $routeParams) {
     var self = this;
 
-    var usernameLogged;
+    var usernameLogged = "GUEST";
 
     // login function
     // the function for submit button on login form gets the user data from DB
@@ -100,13 +100,13 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
         // console.log(manga);
         // console.log($scope.$parent.ctrl.usernameLogged);
         $http({
-                    method: 'PUT',
-                    url: '/user/rent',
-                    data: {
-                        "mangaID": manga.mangaID,
-                        "date_borowed": moment()._d,
-                        "date_due": moment().add(10, 'days')._d
-                    }
+                method: 'PUT',
+                url: '/user/rent',
+                data: {
+                    "mangaID": manga.mangaID,
+                    "date_borowed": moment()._d,
+                    "date_due": moment().add(10, 'days')._d
+                }
 
             })
             .then(function(result) {
@@ -172,7 +172,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
             url: '/user/returnmanga',
             data: {
                 "mangaID": returnedManga.mangaID,
-                "date_returned" : moment(),
+                "date_returned": moment(),
                 "date_borowed": moment()._d,
                 "date_due": moment().add(10, 'days')._d,
                 "usernameRenting": $scope.$parent.ctrl.usernameLogged,
@@ -231,7 +231,9 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 }]); // end MangaIndexController
 
 
-app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParams', '$route', '$q', '$modal', 'ModalService', function($http, $scope, $rootScope, $routeParams, $route, $q, $modal, ModalService) {
+app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParams', '$route', 'ngDialog', 
+    function($http, $scope, $rootScope, $route, $routeParams, ngDialog) {
+            $scope.dataLoaded = true;
 
     this.sayHello = function() {
         alert("HI")
@@ -257,26 +259,20 @@ app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParam
         })
     }
 
-  //    $scope.modal = {title: 'Title', content: 'Hello Modal<br />This is a multiline message!'};
-  $scope.showAModal = function() {
+    this.showData = function(data) {
+        console.log(data);
+        alert("from AdminController. clicked : " + data.title_english);
+    }
 
-    // Just provide a template url, a controller and call 'showModal'.
-    ModalService.showModal({
-      templateUrl: "modal.htmll",
-      controller: "YesNoController"
-    }).then(function(modal) {
-      // The modal object has the element built, if this is a bootstrap modal
-      // you can call 'modal' to show it, if it's a custom modal just show or hide
-      // it as you need to.
-      modal.element.modal();
-      modal.close.then(function(result) {
-        $scope.message = result ? "You said Yes" : "You said No";
-      });
-    });
+    $scope.clickToOpen = function(manga) {
+        $scope.manga = manga;
 
-  };
-
-
+        ngDialog.open({
+            template: 'modal.html',
+            controller: 'AdminController',
+            scope: $scope
+        });
+    };
 
     // http://stackoverflow.com/questions/23490596/angularjs-loading-icon-whilst-waiting-for-data-data-calculation
 

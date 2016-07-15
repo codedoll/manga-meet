@@ -109,3 +109,59 @@ h6.dueDate {
     }
   }
 }
+
+
+.mangaAdmin {
+    display: inline-flex;
+    /* padding: 1em; */
+    margin: 1em;
+    /* width: 200px; */
+    height: 150px;
+    /* word-wrap: initial; */
+}
+
+/*https://css-tricks.com/snippets/css/a-guide-to-flexbox/*/
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+/*https://css-tricks.com/snippets/css/a-guide-to-flexbox/*/
+.flexspacer {
+    padding: 1em 0;
+}
+
+/*https://css-tricks.com/snippets/css/a-guide-to-flexbox/*/
+.flex-item {
+  /*background: tomato;*/
+  padding: 5px;
+  width: 200px;
+  height: 150px;
+  margin-top: 10px;
+  
+  line-height: 150px;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+}
+
+
+.daysLeft {
+    color: red;
+    /*font-weight: bold;*/
+}
+
+.daysInDaysLeft {
+    font-weight: bold;
+}
