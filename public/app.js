@@ -1,4 +1,4 @@
-var app = angular.module('MangaMeet', ['angularMoment','ngRoute']);
+var app = angular.module('MangaMeet', ['angularMoment','ngRoute', 'ngAnimate', 'mgcrea.ngStrap', 'mgcrea.ngStrap.modal', 'angularModalService']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true });
@@ -47,7 +47,9 @@ app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', f
 
     this.sessionLog();
 
-
+    this.showData = function(data) {
+        console.log(data);
+    }
 
 
 }]); // end MainController
@@ -229,7 +231,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 }]); // end MangaIndexController
 
 
-app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParams', '$route', '$q', function($http, $scope, $rootScope, $routeParams, $route, $q) {
+app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParams', '$route', '$q', '$modal', 'ModalService', function($http, $scope, $rootScope, $routeParams, $route, $q, $modal, ModalService) {
 
     this.sayHello = function() {
         alert("HI")
@@ -254,6 +256,27 @@ app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParam
             console.log('fail');
         })
     }
+
+  //    $scope.modal = {title: 'Title', content: 'Hello Modal<br />This is a multiline message!'};
+  $scope.showAModal = function() {
+
+    // Just provide a template url, a controller and call 'showModal'.
+    ModalService.showModal({
+      templateUrl: "modal.htmll",
+      controller: "YesNoController"
+    }).then(function(modal) {
+      // The modal object has the element built, if this is a bootstrap modal
+      // you can call 'modal' to show it, if it's a custom modal just show or hide
+      // it as you need to.
+      modal.element.modal();
+      modal.close.then(function(result) {
+        $scope.message = result ? "You said Yes" : "You said No";
+      });
+    });
+
+  };
+
+
 
     // http://stackoverflow.com/questions/23490596/angularjs-loading-icon-whilst-waiting-for-data-data-calculation
 
