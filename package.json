@@ -19,12 +19,15 @@
   },
   "homepage": "https://github.com/codedoll/manga-meet#readme",
   "dependencies": {
+    "angular-moment": "^1.0.0-beta.6",
+    "angular-route": "^1.5.7",
     "body-parser": "^1.15.2",
     "dotenv": "^2.0.0",
     "env": "0.0.2",
     "express": "^4.14.0",
     "express-session": "^1.14.0",
     "is-null": "^1.0.1",
+    "moment": "^2.14.1",
     "mongoose": "^4.5.3",
     "nani": "^1.2.0",
     "shuffle-array": "^1.0.0"

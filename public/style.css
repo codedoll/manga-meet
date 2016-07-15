@@ -86,3 +86,8 @@ body {
 input#adminSearchBox {
     width:25em;
 }
+
+
+h6.dueDate {
+    margin: .2em;
+}

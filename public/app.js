@@ -1,4 +1,4 @@
-var app = angular.module('MangaMeet', ['ngRoute']);
+var app = angular.module('MangaMeet', ['angularMoment','ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true });
@@ -12,7 +12,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
 // console.log('app.js loaded');
 app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', function($http, $route, $scope, $routeParams) {
-
     var self = this;
 
     var usernameLogged;
@@ -25,11 +24,11 @@ app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', f
             method: 'GET'
         }).then(function(response) {
             console.log(response.data);
-            if (response.data.user != "INVALID" ) {
+            if (response.data.user != "INVALID") {
                 self.usernameLogged = response.data.sessionID;
                 //flip partials to the user menu partials
             }
-            
+
             $route.reload();
 
         })
@@ -49,8 +48,9 @@ app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', f
     this.sessionLog();
 
 
-}]); // end MainController
 
+
+}]); // end MainController
 
 
 
@@ -98,11 +98,14 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
         // console.log(manga);
         // console.log($scope.$parent.ctrl.usernameLogged);
         $http({
-                method: 'PUT',
-                url: '/user/rent',
-                data: {
-                    "mangaID": manga.mangaID
-                }
+                    method: 'PUT',
+                    url: '/user/rent',
+                    data: {
+                        "mangaID": manga.mangaID,
+                        "date_borowed": moment()._d,
+                        "date_due": moment().add(10, 'days')._d
+                    }
+
             })
             .then(function(result) {
                 self.getManga();
@@ -135,7 +138,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
             method: 'GET'
         }).then(function(response) {
             self.rentedOutManga = response.data;
-            // self.reloadView();
+            console.log(response.data);
         })
     };
 
@@ -159,14 +162,20 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
     }
 
 
-    this.returnManga = function(mangaID) {
+    this.returnManga = function(returnedManga) {
         console.log('clicked return');
-        // console.log(mangaID);
+        console.log(returnedManga);
         $http({
             method: 'PUT',
             url: '/user/returnmanga',
             data: {
-                "mangaID": mangaID,
+                "mangaID": returnedManga.mangaID,
+                "date_returned" : moment(),
+                "date_borowed": moment()._d,
+                "date_due": moment().add(10, 'days')._d,
+                "usernameRenting": $scope.$parent.ctrl.usernameLogged,
+                "title_english": returnedManga.title_english,
+                "image_url_med": returnedManga.image_url_med,
             }
         }).then(function(result) {
             self.rentedManga();
@@ -179,9 +188,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 
     //claim a manga on button click
     this.claim = function(manga) {
-        // console.log(manga);
-        // console.log($scope.$parent.ctrl.usernameLogged);
-        console.log('CLAIMED');
+
         $http({
             method: 'POST',
             url: '/user/ownmanga',
@@ -194,7 +201,10 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
                 "usernameRenting": "",
                 "rentedOut": 0
             }
-        })
+        }).then(function(result) {
+            console.log(result);
+
+        });
 
         // What we return here is the data that will be accessible 
         // to us after the promise resolves

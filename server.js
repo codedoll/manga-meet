@@ -15,7 +15,6 @@ var Manga = require('./models/manga_model.js');
 
 
 
-
 app.use(session({
   cookieName: 'session',
   secret: 'beagle',
