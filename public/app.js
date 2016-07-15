@@ -1,4 +1,4 @@
-var app = angular.module('MangaMeet', ['ngRoute', 'angularMoment']);
+var app = angular.module('MangaMeet', ['angularMoment','ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true });
@@ -12,7 +12,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
 // console.log('app.js loaded');
 app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', function($http, $route, $scope, $routeParams) {
-
     var self = this;
 
     var usernameLogged;
