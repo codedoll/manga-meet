@@ -13,9 +13,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 // console.log('app.js loaded');
 app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', function($http, $route, $scope, $routeParams) {
     var self = this;
-
     var usernameLogged = "GUEST";
-
     this.sayHello = function(manga) {
         alert("at MainController. can read manga data. " + manga.title_english)
     }
@@ -50,11 +48,22 @@ app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', f
     };
 
 
+    this.logout = function() {
+        $http({
+            url: '/logout',
+            method: 'GET'
+        }).then(function(response) {
+            self.usernameLogged = response.data.userID;
+        })
+    };
+
     this.sessionLog();
 
     this.showData = function(data) {
         console.log(data);
     }
+
+
 
 
 }]); // end MainController

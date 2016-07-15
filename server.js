@@ -74,6 +74,15 @@ app.get('/manga', function(req, res) {
 // end manga route
 
 
+// LOG OUT
+app.get('/logout', function(req, res) {
+    req.session.destroy();
+    res.redirect("/");
+});
+// logout
+
+
+
 app.get('*', function(req, res){
   res.redirect('/');
 });
