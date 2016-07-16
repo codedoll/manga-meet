@@ -89,7 +89,7 @@ router.put('/returnmanga', function(req, res) {
     var newUserReturn = new UserReturn(req.body);
     newUserReturn.save();
 
-    UserManga.findOneAndUpdate({ "usernameRenting": req.session.username }, {
+    UserManga.findOneAndUpdate({ "mangaID": req.body.mangaID }, {
         "usernameRenting": "",
         "date_borowed": "",
         "date_due": "",
