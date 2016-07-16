@@ -21,7 +21,8 @@ router.get('/register', function(req, res) {
 
 // CREATES THE USER
 router.post('/register', function(req, res) {
-        User.create(req.body, function(err, data){        
+        User.create(req.body, function(err, data){
+            req.session.username = req.body.username;        
             res.redirect("/")
     })
 })

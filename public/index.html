@@ -16,6 +16,8 @@
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
     <script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>
     <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="bower_components/ng-dialog/css/ngDialog.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/ng-dialog/css/ngDialog-theme-default.css">
     <script type="text/javascript" src="app.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
@@ -34,8 +36,9 @@
                 <form ng-submit="ctrl.loginForm(loginform)" ng-if="ctrl.usernameLogged == GUEST">
                     <input type="text" name="" ng-model="loginform.username" placeholder="username" class="form-control">
                     <input type="text" name="" ng-model="loginform.password" placeholder="password" class="form-control">
-                    <input type="submit" class="btn btn-default">
-                    <a href="http://localhost:3000/user/register">register</a>
+                    <input type="submit" class="btn btn-default" value="login">
+                    <br>
+                    <span class="register-link" ng-click="ctrl.registerModal()">Not signed up? Register here.</span>
                 </form>
                 <div ng-if="ctrl.usernameLogged != GUEST">
                     <h3> Hi, {{ctrl.usernameLogged}}! </h3>
@@ -50,18 +53,16 @@
         <!-- DO YOU OWN THESE MANGAS -->
         <div>
             <div class="doYouOwn">
-            <h1 ng-if="ctrl.usernameLogged != GUEST">Do you own these titles?</h1>
-            <h1 ng-if="ctrl.usernameLogged == GUEST">Rent from other manga enthusiasts!</h1>
+                <h1 ng-if="ctrl.usernameLogged != GUEST">Do you own these titles?</h1>
+                <h1 ng-if="ctrl.usernameLogged == GUEST">Rent from other manga enthusiasts!</h1>
             </div>
             <div class="flex" id="claimTitleHolder" ng-controller="MangaController as mctrl">
                 <div id="currentReadHolder">
                     <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:40 | orderBy:random">
                         <div class="mangaRecommend">
-                        
                             <a href="/manga/{{manga._id}}" target="_parent">
                                 <img src="{{manga.image_url_med}}">
                             </a>
-
                             <br/> {{manga.title_english}}
                             <br/>
                             <button class="box-one btn btn-primary" ng-click="mctrl.claim(manga)" ng-if="ctrl.usernameLogged != GUEST">own this</button>

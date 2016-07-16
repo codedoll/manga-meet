@@ -11,12 +11,25 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 }])
 
 // console.log('app.js loaded');
-app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', function($http, $route, $scope, $routeParams) {
+app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', 'ngDialog', function($http, $route, $scope, $routeParams, ngDialog) {
     var self = this;
     var usernameLogged = "GUEST";
-    this.sayHello = function(manga) {
-        alert("at MainController. can read manga data. " + manga.title_english)
+    this.sayHello = function() {
+        alert("saHello()")
     }
+
+    //registration popup
+    this.registerModal = function() {
+            // $scope.manga = manga;
+
+            ngDialog.open({
+                template: '/partial/user_register_partial.html',
+                // className: 'ngdialog-theme-plain',
+                // controller: 'MangaController',
+                scope: $scope
+            });
+        }
+        //
 
 
     // login function
@@ -70,7 +83,7 @@ app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', f
 
 
 
-app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', function($http, $scope, $routeParams, $route) {
+app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 'ngDialog', function($http, $scope, $routeParams, $route, ngDialog) {
 
     var self = this;
 
@@ -106,6 +119,34 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 
     //
 
+
+    // MODAL for INDEX
+    this.indexModal = function(manga) {
+
+            // $scope.manga = manga;
+
+            // ngDialog.open({
+            //     template: 'modal.html',
+            //     controller: 'AdminController',
+            //     scope: $scope
+            // });
+
+            console.log(manga);
+            console.log("Hi the manga is " + manga.title_english);
+
+            // $scope.clickToOpen = function(manga) {
+            $scope.manga = manga;
+
+            ngDialog.open({
+                template: '/partial/show_page.html',
+                // className: 'ngdialog-theme-plain',
+                controller: 'MangaController',
+                scope: $scope
+            });
+            // };
+
+        }
+        //
 
 
 
@@ -245,64 +286,65 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 }]); // end MangaIndexController
 
 
-app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParams', '$route', 'ngDialog', 
+app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParams', '$route', 'ngDialog',
     function($http, $scope, $rootScope, $route, $routeParams, ngDialog) {
-            $scope.dataLoaded = true;
+        $scope.dataLoaded = true;
 
-    this.sayHello = function() {
-        alert("HI")
+        this.sayHello = function() {
+            alert("HI")
+        }
+
+        var self = this;
+
+        this.fromNani = function(data) {
+            console.log(data);
+            $scope.dataLoaded = false;
+            $http({
+                method: 'POST',
+                url: '/search',
+                data: { data: data }
+            }).then(function(response) {
+                $scope.dataLoaded = true;
+
+                self.data = response.data;
+                console.log(response);
+            }, function(response) {
+                //fail callback
+                console.log('fail');
+            })
+        }
+
+        // This is what "ADD MANGA" button does from modal.html
+        // Adds data to collection "mangas" . Make sure data passed is correct.
+        // Look at manga_model for properties.
+
+        this.addToMangaDB = function(data) {
+            // console.log(data);
+            // alert("from AdminController. clicked : " + data.title_english);
+            $http({
+                method: 'POST',
+                url: '/manga/addmanga',
+                data: data
+            }).then(function(response) {
+                console.log(response);
+            }, function(response) {
+                //fail callback
+                console.log('fail');
+            })
+
+        }
+
+        $scope.clickToOpen = function(manga) {
+            $scope.manga = manga;
+
+            ngDialog.open({
+                template: 'modal.html',
+                controller: 'AdminController',
+                scope: $scope
+            });
+        };
+
+        // http://stackoverflow.com/questions/23490596/angularjs-loading-icon-whilst-waiting-for-data-data-calculation
+
     }
-
-    var self = this;
-
-    this.fromNani = function(data) {
-        console.log(data);
-        $scope.dataLoaded = false;
-        $http({
-            method: 'POST',
-            url: '/search',
-            data: { data: data }
-        }).then(function(response) {
-            $scope.dataLoaded = true;
-
-            self.data = response.data;
-            console.log(response);
-        }, function(response) {
-            //fail callback
-            console.log('fail');
-        })
-    }
-
-// This is what "ADD MANGA" button does from modal.html
-// Adds data to collection "mangas" . Make sure data passed is correct.
-// Look at manga_model for properties.
-
-    this.addToMangaDB = function(data) {
-        // console.log(data);
-        // alert("from AdminController. clicked : " + data.title_english);
-        $http({
-            method: 'POST',
-            url: '/manga/addmanga',
-            data: data
-        }).then(function(response) {
-            console.log(response);
-        }, function(response) {
-            //fail callback
-            console.log('fail');
-        })
-
-    }
-
-    $scope.clickToOpen = function(manga) {
-        $scope.manga = manga;
-
-        ngDialog.open({
-            template: 'modal.html',
-            controller: 'AdminController',
-            scope: $scope
-        });
-    };
-
-    // http://stackoverflow.com/questions/23490596/angularjs-loading-icon-whilst-waiting-for-data-data-calculation
-
-}]); // end AdminController
+]); // end AdminController
