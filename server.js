@@ -13,6 +13,9 @@ var express = require('express'),
 
 var Manga = require('./models/manga_model.js');
 
+/*Views*/
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
 
 app.use(session({

@@ -55,7 +55,11 @@
                 <div id="currentReadHolder">
                     <div class="currentRead" ng-repeat="manga in mctrl.mangaCover | limitTo:40 | orderBy:random">
                         <div class="mangaRecommend">
-                            <img src="{{manga.image_url_med}}">
+                        
+                            <a href="/manga/{{manga._id}}" target="_parent">
+                                <img src="{{manga.image_url_med}}">
+                            </a>
+
                             <br/> {{manga.title_english}}
                             <br/>
                             <button class="box-one btn btn-primary" ng-click="mctrl.claim(manga)" ng-if="ctrl.usernameLogged != GUEST">own this</button>

@@ -89,7 +89,7 @@ router.get('/seed', function(req,res){
 
 router.get('/:id', function(req,res){
     Manga.findById(req.params.id,function(err,others){
-        res.render('show_page', {
+        res.render('show_page.html.ejs', {
             manga: others
         })
     })
