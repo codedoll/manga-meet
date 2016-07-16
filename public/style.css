@@ -206,3 +206,8 @@ h6.dueDate {
   font-family: 'Chewy', cursive;
   font-size: 5em;
 }
+
+.register-link {
+    font-size: 1em;
+    font-weight: bold;
+}

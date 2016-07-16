@@ -2,15 +2,12 @@
 <div id='viewContainer' class="index-flex-container">
     <div class="index-flex-item">
         <h3>Mangas reading</h3>
-        <div class="flex">
+        <div>
             <div id="rentedMangaHolder">
                 <div class="currentRead" ng-repeat="rented in mctrl.rentedOutManga ">
                     <div class="mangaRecommend">
-
-                        <a href="/manga/{{rented.mangaID}}" target="_parent">
-                            <br/> <img src="{{rented.image_url_med}}">
-                        </a>
-
+                        <br/> <img src="{{rented.image_url_med}}" ng-click="mctrl.indexModal(rented)">
+                        <!-- </a> -->
                         <br/> {{rented.title_english}}
                         <h6 class="dueDate daysLeft"> <span class="daysInDaysLeft">{{rented.date_due| amDifference : null : 'days'}}</span> days left</h6>
                         <h6 class="dueDate"> Return: {{rented.date_due | amUtc | amDateFormat:'MMMM DD YY'}}</h6>
@@ -21,30 +18,28 @@
             </div>
         </div>
     </div>
-
-<!-- end manga volumes reading -->
-<!-- RECOMMENDED MANGAS -->
-<div class="index-flex-item">
-    <h3>Rent from others</h3>
-    <div class="flex">
-        <div id="recommendReadHolder">
-            <div id="currentReadHolder">
-                <div class="currentRead" ng-repeat="others in mctrl.othersManga | limitTo: 15 | orderBy:random">
-                    <div class="mangaRecommend">
-
-                        <a href="/manga/{{others.mangaID}}" target="_parent">
-                            <img src="{{others.image_url_med}}">
-                        </a>
-
-                        <br/> {{others.title_english}}
-                        <br/>
-                        <button class="btn btn-info" ng-click="mctrl.rentManga(others)">borrow</button>
+    <!-- end manga volumes reading -->
+    <!-- RECOMMENDED MANGAS -->
+    <div class="index-flex-item">
+        <h3>Rent from others</h3>
+        <div>
+            <div id="recommendReadHolder">
+                <div id="currentReadHolder">
+                    <div class="currentRead" ng-repeat="others in mctrl.othersManga | limitTo: 15">
+                        <div class="mangaRecommend">
+                            <!-- <a href="/manga/{{others.mangaID}}" target="_parent"> -->
+                            <!-- <img src="{{others.image_url_med}}"> -->
+                            <!-- </a> -->
+                            <img src="{{others.image_url_med}}" ng-click="mctrl.indexModal(others)">
+                            <br/> {{others.title_english}}
+                            <br/>
+                            <button class="btn btn-info" ng-click="mctrl.rentManga(others)">borrow</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <!-- end recommended mangas -->
 </div>
@@ -54,11 +49,10 @@
     <div class="flex">
         <div id="ownedMangaHolder">
             <div class="currentRead" ng-repeat="ownedmanga in mctrl.owned ">
-
-                <a href="/manga/{{ownedmanga.mangaID}}" target="_parent">
+                <!--                 <a href="/manga/{{ownedmanga.mangaID}}" target="_parent">
                     <br/> <img src="{{ownedmanga.image_url_med}}">
-                </a>
-
+                </a> -->
+                <img src="{{ownedmanga.image_url_med}}" ng-click="mctrl.indexModal(ownedmanga)">
                 <br/> {{ownedmanga.title_english}}
                 <form ng-submit="mctrl.delete(ownedmanga)">
                     <input class="btn btn-danger" type="submit" value="delete" ng-click="mctrl.reloadView()">
