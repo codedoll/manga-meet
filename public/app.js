@@ -286,8 +286,8 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 }]); // end MangaIndexController
 
 
-app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParams', '$route', 'ngDialog',
-    function($http, $scope, $rootScope, $route, $routeParams, ngDialog) {
+app.controller('AdminController', ['$http', '$scope', '$route', '$rootScope', '$routeParams', '$route', 'ngDialog',
+    function($http, $scope, $route, $rootScope, $route, $routeParams, ngDialog) {
         $scope.dataLoaded = true;
 
         this.sayHello = function() {
@@ -335,13 +335,28 @@ app.controller('AdminController', ['$http', '$scope', '$rootScope', '$routeParam
         }
 
         $scope.clickToOpen = function(manga) {
-            $scope.manga = manga;
+            console.log(manga);
+            
 
-            ngDialog.open({
-                template: 'modal.html',
-                controller: 'AdminController',
-                scope: $scope
-            });
+            $http({
+                method: 'GET',
+                url: '/search/' + manga.id,
+                data: manga
+            }).then(function(response) {
+                console.log(response.data);
+                $scope.manga = response.data;
+                ngDialog.open({
+                    template: 'modal.html',
+                    controller: 'AdminController',
+                    scope: $scope
+                });
+            }, function(response) {
+                //fail callback
+                console.log('fail');
+            })
+
+
+
         };
 
         // http://stackoverflow.com/questions/23490596/angularjs-loading-icon-whilst-waiting-for-data-data-calculation
