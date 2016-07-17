@@ -135,11 +135,14 @@ router.post('/login', function(req, res) {
 
 
             } else {
-                console.log(req.body.password);
-                console.log(user);
+                console.log("wrong password");
+                // console.log(user);
                 res.send("wrong password")
             }
 
+        } else if (err) {
+            console.log('invalid credentials');
+            res.send("invalid credentials")
         }
     });
 
