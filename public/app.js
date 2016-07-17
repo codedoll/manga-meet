@@ -1,4 +1,4 @@
-var app = angular.module('MangaMeet', ['angularMoment', 'ngRoute', 'ngAnimate', 'ngDialog']);
+var app = angular.module('MangaMeet', ['angularMoment', 'ngRoute', 'ngAnimate', 'ngDialog', 'ngSanitize']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true });
@@ -253,29 +253,31 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
                 "username": $scope.$parent.ctrl.usernameLogged,
                 "mangaID": manga._id,
                 "title_english": manga.title_english,
-                "description" : manga.description,
-                "genres" : [],
+                "description": manga.description,
+                "genres": [manga.genres],
                 "image_url_med": manga.image_url_med,
                 "image_url_lge": manga.image_url_lge,
                 "total_volumes": manga.total_volumes,
                 "usernameRenting": "",
                 "rentedOut": 0
 
-                    //             "username" : String,
-                    // "mangaID" : String,
-                    // "title_english" : String,
-                    // "description" : String,
-                    // "genres" : [],
-                    // "image_url_med" : String,
-                    // "image_url_lge": String,
-                    // "publishing_status": String,
-                    // "total_volumes" : Number,
-                    // "usernameRenting" : String,
-                    // "rentedOut" : Boolean,
-                    // "date_borowed" : String,
-                    // "date_due" : String,
-                    // "date_returned" : String
+                //             "username" : String,
+                // "mangaID" : String,
+                // "title_english" : String,
+                // "description" : String,
+                // "genres" : [],
+                // "image_url_med" : String,
+                // "image_url_lge": String,
+                // "publishing_status": String,
+                // "total_volumes" : Number,
+                // "usernameRenting" : String,
+                // "rentedOut" : Boolean,
+                // "date_borowed" : String,
+                // "date_due" : String,
+                // "date_returned" : String
             }
+
+
         }).then(function(result) {
             console.log(result);
 
@@ -354,7 +356,7 @@ app.controller('AdminController', ['$http', '$scope', '$route', '$rootScope', '$
 
         $scope.clickToOpen = function(manga) {
             console.log(manga);
-            
+
 
             $http({
                 method: 'GET',
