@@ -6,9 +6,10 @@
             <div id="rentedMangaHolder">
                 <div class="currentRead" ng-repeat="rented in mctrl.rentedOutManga ">
                     <div class="mangaRecommend">
-                        <a href="/manga/{{rented.mangaID}}" target="_parent">
+                        <!--  <a href="/manga/{{rented.mangaID}}" target="_parent">
                         <br/> <img src="{{rented.image_url_med}}">
-                        </a>
+                        </a> -->
+                        <img src="{{rented.image_url_med}}" ng-click="mctrl.indexModal(rented)">
                         <br/> {{rented.title_english}}
                         <h6 class="dueDate daysLeft"> <span class="daysInDaysLeft">{{rented.date_due| amDifference : null : 'days'}}</span> days left</h6>
                         <h6 class="dueDate"> Return: {{rented.date_due | amUtc | amDateFormat:'MMMM DD YY'}}</h6>
@@ -50,7 +51,7 @@
     <div class="flex">
         <div id="ownedMangaHolder">
             <div class="currentRead" ng-repeat="ownedmanga in mctrl.owned ">
-               <!--  <a href="/manga/{{ownedmanga.mangaID}}" target="_parent">
+                <!--  <a href="/manga/{{ownedmanga.mangaID}}" target="_parent">
                     <br/> <img src="{{ownedmanga.image_url_med}}">
                 </a> -->
                 <img src="{{ownedmanga.image_url_med}}" ng-click="mctrl.indexModal(ownedmanga)">
