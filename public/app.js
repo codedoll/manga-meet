@@ -249,15 +249,16 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
         $http({
             method: 'POST',
             url: '/user/ownmanga',
-            data: {
-                "username": $scope.$parent.ctrl.usernameLogged,
-                "mangaID": manga._id,
-                "title_english": manga.title_english,
-                "image_url_med": manga.image_url_med,
-                "total_volumes": manga.total_volumes,
-                "usernameRenting": "",
-                "rentedOut": 0
-            }
+            data: manga
+            // data: {
+            //     "username": $scope.$parent.ctrl.usernameLogged,
+            //     "mangaID": manga._id,
+            //     "title_english": manga.title_english,
+            //     "image_url_med": manga.image_url_med,
+            //     "total_volumes": manga.total_volumes,
+            //     "usernameRenting": "",
+            //     "rentedOut": 0
+            // }
         }).then(function(result) {
             console.log(result);
 

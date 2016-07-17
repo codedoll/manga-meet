@@ -1,15 +1,7 @@
-<!-- <script type="text/ng-template" id="modal.html"> -->
-
-
-<h4>{{manga.title_english}}</h4>
-<img src="{{manga.image_url_med}}">
-<!-- <div class="index-flex-item"> -->
-    <!-- <div class="flex"> -->
-        <p>
-            {{manga.description}}
-        </p>
-    <!-- </div> -->
-<!-- <button class="ngdialog-close"></button> -->
-<div class="ngdialog-close"></div>
-<!-- </div> -->
-<!-- </script> -->
+<img src="{{manga.image_url_med}}"><br/>
+English title: {{manga.title_english}}<br/>
+Japanese title: {{manga.title_japanese}}<br/>
+Romanji title: {{manga.title_romaji}}<br/>
+Volumes: {{manga.total_volumes}}<br/>
+Description: {{manga.description}}<br/>
+<button ng-click="actrl.addToMangaDB(manga)" class="btn btn-primary">Add Manga</button>
