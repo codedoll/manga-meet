@@ -28,10 +28,10 @@
                 <div id="currentReadHolder">
                     <div class="currentRead" ng-repeat="others in mctrl.othersManga | limitTo: 15">
                         <div class="mangaRecommend">
-                            <a href="/manga/{{others.mangaID}}" target="_parent">
+                            <!-- <a href="/manga/{{others.mangaID}}" target="_parent">
                                 <img src="{{others.image_url_med}}">
-                            </a>
-                            <!-- <img src="{{others.image_url_med}}" ng-click="mctrl.indexModal(others)"> -->
+                            </a> -->
+                            <img src="{{others.image_url_med}}" ng-click="mctrl.indexModal(others)">
                             <br/> {{others.title_english}}
                             <br/>
                             <button class="btn btn-info" ng-click="mctrl.rentManga(others)">borrow</button>
@@ -50,10 +50,10 @@
     <div class="flex">
         <div id="ownedMangaHolder">
             <div class="currentRead" ng-repeat="ownedmanga in mctrl.owned ">
-                <a href="/manga/{{ownedmanga.mangaID}}" target="_parent">
+               <!--  <a href="/manga/{{ownedmanga.mangaID}}" target="_parent">
                     <br/> <img src="{{ownedmanga.image_url_med}}">
-                </a>
-                <!-- <img src="{{ownedmanga.image_url_med}}" ng-click="mctrl.indexModal(ownedmanga)"> -->
+                </a> -->
+                <img src="{{ownedmanga.image_url_med}}" ng-click="mctrl.indexModal(ownedmanga)">
                 <br/> {{ownedmanga.title_english}}
                 <form ng-submit="mctrl.delete(ownedmanga)">
                     <input class="btn btn-danger" type="submit" value="delete" ng-click="mctrl.reloadView()">
