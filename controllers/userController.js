@@ -36,8 +36,9 @@ router.get('/sessionchecker', function(req, res) {
 
 // PUSH INTO DB MANGAS USER OWNS
 router.post('/ownmanga', function(req, res) {
-    console.log(req.body);
+    console.log("req.body ownmange " + req.body.data);
     UserManga.create(req.body, function(err, data) {
+        // console.log(data);
         res.send(data);
     });
 });

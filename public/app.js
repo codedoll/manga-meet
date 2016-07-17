@@ -195,7 +195,7 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
             method: 'GET'
         }).then(function(response) {
             self.rentedOutManga = response.data;
-            console.log(response.data);
+            // console.log(response.data);
         })
     };
 
@@ -245,20 +245,37 @@ app.controller('MangaController', ['$http', '$scope', '$routeParams', '$route', 
 
     //claim a manga on button click
     this.claim = function(manga) {
-
+        console.log(manga);
         $http({
             method: 'POST',
             url: '/user/ownmanga',
-            data: manga
-            // data: {
-            //     "username": $scope.$parent.ctrl.usernameLogged,
-            //     "mangaID": manga._id,
-            //     "title_english": manga.title_english,
-            //     "image_url_med": manga.image_url_med,
-            //     "total_volumes": manga.total_volumes,
-            //     "usernameRenting": "",
-            //     "rentedOut": 0
-            // }
+            data: {
+                "username": $scope.$parent.ctrl.usernameLogged,
+                "mangaID": manga._id,
+                "title_english": manga.title_english,
+                "description" : manga.description,
+                "genres" : [],
+                "image_url_med": manga.image_url_med,
+                "image_url_lge": manga.image_url_lge,
+                "total_volumes": manga.total_volumes,
+                "usernameRenting": "",
+                "rentedOut": 0
+
+                    //             "username" : String,
+                    // "mangaID" : String,
+                    // "title_english" : String,
+                    // "description" : String,
+                    // "genres" : [],
+                    // "image_url_med" : String,
+                    // "image_url_lge": String,
+                    // "publishing_status": String,
+                    // "total_volumes" : Number,
+                    // "usernameRenting" : String,
+                    // "rentedOut" : Boolean,
+                    // "date_borowed" : String,
+                    // "date_due" : String,
+                    // "date_returned" : String
+            }
         }).then(function(result) {
             console.log(result);
 
