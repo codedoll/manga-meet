@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register page</title>
+    <title></title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -10,17 +10,18 @@
 
 
 <div id='viewContainer' class="index-flex-container">
-    <div class="index-flex-item">
-        <div class="flex">
+    <div id= "currentReadHolder" class="index-flex-item">
             <h4><%= manga.title_english %></h4>
             <img src="<%= manga.image_url_med %>">
+            <h5><%= manga.title_japanese%></h5>
         </div>
     </div>
 
-<div class="index-flex-item">
-    <div class="flex">
+<div id= "currentReadHolder" class="index-flex-item">
 
+        <h4>Number of volumes:  <%= manga.total_volumes %></h4>
         <p><%= manga.description%></p>
+        <h6>Genres: <%= manga.genres%></h6>
 
     </div>
     <a href="/">Click here to return to Main page</a>
