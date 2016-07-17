@@ -117,16 +117,18 @@ router.delete('/delete', function(req, res) {
 // LOGIN ROUTE
 router.post('/login', function(req, res) {
     console.log(req.body);
-    req.session.username = req.body.username;
+    // req.session.username = req.body.username;
 
     User.findOne({ "username": req.body.username }, function(err, user) {
         if (user == null) {
             console.log("no user found");
             res.send({ user: "INVALID" })
-        } else if (user != null) {
+        } else if (user.username === req.body.username) {
             // sets a cookie with the user's info
 
             if (bcrypt.compareSync(req.body.password, user.password)) {
+
+                req.session.username = req.body.username;
 
                 res.send({
                     user: user,
@@ -140,10 +142,7 @@ router.post('/login', function(req, res) {
                 res.send("wrong password")
             }
 
-        } else if (err) {
-            console.log('invalid credentials');
-            res.send("invalid credentials")
-        }
+        } 
     });
 
 });
