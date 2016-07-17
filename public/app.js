@@ -3,11 +3,19 @@ var app = angular.module('MangaMeet', ['angularMoment', 'ngRoute', 'ngAnimate', 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true });
 
-    $routeProvider.when('/', {
+    $routeProvider
+
+    .when('/', {
         templateUrl: 'partial/home_page.html',
         controller: 'MangaController',
         controllerAs: 'mctrl'
     })
+
+    .when('/admin', {  
+        templateUrl: '/admin.html',  
+        controller: 'AdminController',
+        controllerAs: 'actrl'
+    })  
 }])
 
 // console.log('app.js loaded');

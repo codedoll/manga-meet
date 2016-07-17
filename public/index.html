@@ -44,8 +44,13 @@
                 </form>
                 <div ng-if="ctrl.usernameLogged != GUEST">
                     <h3> Hi, {{ctrl.usernameLogged}}! </h3>
-                    <button class="btn btn-primary btn" ng-click="ctrl.logout()">logout</button>
+                    <button class="btn btn-default btn" ng-click="ctrl.logout()">logout</button>
+                    <a href="/admin">
+                      <button ng-if="ctrl.usernameLogged == 'Lyn'" ng-href="/admin" target="_parent" class="btn btn-primary btn">admin</button>
+                    </a>
                 </div>
+                  
+                
             </div>
         </div>
         <div ng-if="ctrl.usernameLogged != GUEST" ng-view>
