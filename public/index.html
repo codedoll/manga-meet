@@ -35,7 +35,7 @@
             <div class="headerDiv" id="login-partial">
                 <form ng-submit="ctrl.loginForm(loginform)" ng-if="ctrl.usernameLogged == GUEST">
                     <input type="text" name="" ng-model="loginform.username" placeholder="username" class="form-control">
-                    <input type="text" name="" ng-model="loginform.password" placeholder="password" class="form-control">
+                    <input type="password" name="" ng-model="loginform.password" placeholder="password" class="form-control">
                     <input type="submit" class="btn btn-default" value="login">
                     <br>
                     <span class="register-link" ng-click="ctrl.registerModal()">Not signed up? Register here.</span>
