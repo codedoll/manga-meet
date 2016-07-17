@@ -35,9 +35,11 @@ app.controller('MainController', ['$http', '$route', '$scope', '$routeParams', '
     // login function
     // the function for submit button on login form gets the user data from DB
     this.loginForm = function(loginform) {
+        console.log(loginform);
         $http({
-            url: '/user/' + loginform.username,
-            method: 'GET'
+            url: '/user/login',
+            method: 'POST',
+            data: loginform
         }).then(function(response) {
             console.log(response.data);
             if (response.data.user != "INVALID") {
