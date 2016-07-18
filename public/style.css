@@ -231,6 +231,6 @@ h6.dueDate {
     text-shadow:0px 0px 0 rgb(192,200,144),1px 1px 0 rgb(177,185,129),2px 2px 0 rgb(163,171,115),3px 3px 0 rgb(148,156,100),4px 4px 0 rgb(134,142,86),5px 5px 0 rgb(119,127,71), 6px 6px 0 rgb(105,113,57),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
 
-a:hover {
+a:hover, a:visited {
     text-decoration: none;
 }
