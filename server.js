@@ -1,6 +1,6 @@
-// require('dotenv').config();
+require('dotenv').config();
 
-var nani = require('nani').init("codedoll-nzqbx", "cf3rXs48cV6nUshNYrUB9zZH3u");
+var nani = require('nani').init(process.env.CLIENTID, process.env.SECRET);
 
 //Calling dependencies
 var express = require('express'),

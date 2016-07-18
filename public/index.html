@@ -32,7 +32,9 @@
     <main ng-controller="MangaController as mctrl">
         <div id="home-header">
             <div class="headerDiv" id="header-title">
-                <h1 id="mangameet-title" class="Three-Dee">MangaMeet</h1>
+                <a href="/">
+                    <h1 id="mangameet-title" class="Three-Dee">MangaMeet</h1>
+                </a>
             </div>
             <div class="headerDiv" id="login-partial">
                 <form ng-submit="ctrl.loginForm(loginform)" ng-if="ctrl.usernameLogged == GUEST">
