@@ -1,5 +1,6 @@
 # Manga Meet
 ----------
+[Go to live site (https://fatidique-vin-27997.herokuapp.com/)](https://fatidique-vin-27997.herokuapp.com/)
 
 ![enter image description here](https://github.com/codedoll/manga-meet/blob/master/Screen%20Shot%202016-07-11%20at%202.34.33%20PM.png?raw=true)
 
